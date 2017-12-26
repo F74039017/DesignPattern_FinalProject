@@ -9,14 +9,14 @@ public class CreateTableCmd extends Command {
 	 * All fields use type "TEXT"
 	 */
 	private String sqlTemplateBegin = "CREATE TABLE %s " +
-			            "(ID INT PRIMARY KEY NOT NULL,";
+			            "(ID INTEGER PRIMARY KEY AUTOINCREMENT,";
 	private String sqlTemplateEnd = " %s TEXT NOT NULL)"; 
 	private String appendFieldTemplate = " %s TEXT NOT NULL,";
 	
 	/**
 	 * Table's fields are defined by the constructor parameters.
 	 * Once the instance created, it can't be modified.
-	 * @param args    the first arg is table name, and the others are field names.
+	 * @param args    <Table> <Field1> <Field2>
 	 */
 	public CreateTableCmd(String... args) {
 		super("CreateTable", args);
@@ -41,10 +41,10 @@ public class CreateTableCmd extends Command {
 		for(int i=1; i<args.size(); i++) {
 			if (i!=args.size()-1) {
 				//XXX: It would be better to use String Builder...
-				ret = ret + String.format(appendFieldTemplate, args.get(i));
+				ret += String.format(appendFieldTemplate, args.get(i));
 			}
 			else {
-				ret = ret + String.format(sqlTemplateEnd, args.get(args.size()-1));
+				ret += String.format(sqlTemplateEnd, args.get(args.size()-1));
 			}
 		}
 		

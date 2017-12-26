@@ -36,12 +36,6 @@ public class Broker {
 	public void execMod() throws Exception {
 		try {
 			for (Command command : commandList) {
-				if (connection == null) {
-					System.out.println("Null Connection");
-				}
-				else { 
-					System.out.println("Cool");
-				}
 				command.rootExec(connection);
 			}			
 		} catch (Exception e) {
