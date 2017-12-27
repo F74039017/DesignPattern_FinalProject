@@ -13,11 +13,6 @@ public class SceneManager {
 	
 	private Stage primaryStage;
 	private Map<String, Scene> sceneMap;
-	private static final String[] fxmlList = {
-			"ui.fxml",
-			"ui2.fxml"
-	};
-	private static final String defaultSecene = "ui";
 		
 	public SceneManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -26,7 +21,7 @@ public class SceneManager {
 	}
 	
 	private void initAllScene() {
-		for (String string : fxmlList) {
+		for (String string : SceneConfig.FXML_LIST) {
 			try {
 				addScene(string);
 			} catch (Exception e) {
@@ -34,8 +29,8 @@ public class SceneManager {
 			}
 		}
 		
-		if (existScene(defaultSecene)) {
-			primaryStage.setScene(sceneMap.get(defaultSecene));
+		if (existScene(SceneConfig.DEFAULT_SCENE)) {
+			primaryStage.setScene(sceneMap.get(SceneConfig.DEFAULT_SCENE));
 		}
 		else {
 			System.err.println("Can not found default scene.");

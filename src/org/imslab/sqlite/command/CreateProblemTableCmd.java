@@ -2,7 +2,7 @@ package org.imslab.sqlite.command;
 
 import java.sql.Statement;
 
-public class CreateProblemTableCmd extends Command {
+public class CreateProblemTableCmd extends ModifyCommand {
 
 	private static String tableName = "Problem";
 	private static String contentField = "CONTENT";

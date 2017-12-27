@@ -4,7 +4,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InsertCmd extends Command {
+public class InsertCmd extends ModifyCommand {
 
 	/**
 	 * Statement primary field named "ID".

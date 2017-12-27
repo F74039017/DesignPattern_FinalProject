@@ -5,14 +5,17 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import javax.management.Query;
 
 import org.imslab.sqlite.DB;
 
 public class Broker {
 
 	protected Connection connection = null;
-	protected List<Command> commandList = null;
+	protected List<ModifyCommand> commandList = null;
 	
 	public Broker() {
 		commandList = new ArrayList<>();
@@ -24,7 +27,7 @@ public class Broker {
 		}
 	}
 	
-	public void addCommand(Command cmd) {
+	public void addCommand(ModifyCommand cmd) {
 		commandList.add(cmd);
 	}
 	
@@ -35,7 +38,7 @@ public class Broker {
 	 */
 	public void execMod() throws Exception {
 		try {
-			for (Command command : commandList) {
+			for (ModifyCommand command : commandList) {
 				command.rootExec(connection);
 			}			
 		} catch (Exception e) {
@@ -46,13 +49,18 @@ public class Broker {
 		}
 	}
 	
-	public ResultSet execQuery(String tableName) throws Exception {
-		if (checkConn()) {
-			Statement statement = connection.createStatement();
-			return statement.executeQuery(String.format("SELECT * FROM %s;", tableName));
-		}
-		else {
-			throw new Exception("Not Connected to database yet.");
+	/**
+	 * Query command wrapper
+	 * @param command
+	 * @return
+	 * @throws Exception
+	 */
+	public List<HashMap<String, String>> execQuery(QueryCommand command) throws Exception {
+		try {
+			List<HashMap<String, String>> ret = command.query(connection);
+			return ret;
+		} catch (Exception e) {
+			throw e;
 		}
 	}
 	

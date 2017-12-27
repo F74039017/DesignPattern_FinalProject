@@ -2,7 +2,7 @@ package org.imslab.sqlite.command;
 
 import java.sql.Statement;
 
-public class CreateTableCmd extends Command {
+public class CreateTableCmd extends ModifyCommand {
 
 	/**
 	 * Statement primary field named "ID".
@@ -42,15 +42,11 @@ public class CreateTableCmd extends Command {
 		}
 		
 		String ret = String.format(sqlTemplateBegin, args.get(0));
-		for(int i=1; i<args.size(); i++) {
-			if (i!=args.size()-1) {
-				//XXX: It would be better to use String Builder...
-				ret += String.format(appendFieldTemplate, args.get(i));
-			}
-			else {
-				ret += String.format(sqlTemplateEnd, args.get(args.size()-1));
-			}
+		for(int i=1; i<args.size()-1; i++) {
+			//XXX: It would be better to use String Builder...
+			ret += String.format(appendFieldTemplate, args.get(i));
 		}
+		ret += String.format(sqlTemplateEnd, args.get(args.size()-1));
 		
 		// debug
 		System.out.println(ret);
