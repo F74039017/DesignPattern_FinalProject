@@ -10,9 +10,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("ui.fxml"));
-
-        primaryStage.setScene(new Scene(root));
+    	
+    		// init all scene once the sceneManager is created.
+    		SceneManager sceneManager = new SceneManager(primaryStage);
+    		
         primaryStage.show();
     }
 

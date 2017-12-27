@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
 public class Controller {
+	
+	private SceneManager sceneManager;
 
     @FXML
     private Text output;
@@ -15,6 +17,14 @@ public class Controller {
     private boolean start = true;
 
     private Model model = new Model();
+    
+    public Controller() {
+		// TODO Auto-generated constructor stub
+	}
+    
+    public Controller(SceneManager sceneManager) {
+    		this.sceneManager = sceneManager;
+    }
 
     @FXML
     private void processNumpad(ActionEvent event) {
@@ -48,4 +58,8 @@ public class Controller {
             start = true;
         }
     }
+
+	@FXML public void switchScene() {
+		sceneManager.switchScene("ui2");
+	}
 }

@@ -1,4 +1,4 @@
-package sqlite.command;
+package org.imslab.sqlite.command;
 
 import java.sql.Statement;
 
@@ -23,8 +23,12 @@ public class CreateTableCmd extends Command {
 	}
 
 	@Override
-	public void exec(Statement statement) throws Exception {
-		statement.executeUpdate(buildStatement());		
+	public void exec(Statement statement) {
+		try {
+			statement.executeUpdate(buildStatement());		
+		} catch (Exception e) {
+			System.out.println(String.format("Table %s had already been created.", args.get(0)));
+		}
 	}
 	
 	/**

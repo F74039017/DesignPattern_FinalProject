@@ -23,9 +23,9 @@
     </StackPane>
 
     <HBox spacing="10" alignment="CENTER">
-        <Button text="7" prefWidth="50" font="$FONT" onAction="#processNumpad" />
-        <Button text="8" prefWidth="50" font="$FONT" onAction="#processNumpad" />
-        <Button text="9" prefWidth="50" font="$FONT" onAction="#processNumpad" />
+        <Button text="1" prefWidth="50" font="$FONT" onAction="#processNumpad" />
+        <Button text="2" prefWidth="50" font="$FONT" onAction="#processNumpad" />
+        <Button text="3" prefWidth="50" font="$FONT" onAction="#processNumpad" />
         <Button text="/" prefWidth="50" font="$FONT" onAction="#processOperator" />
     </HBox>
     
@@ -37,15 +37,14 @@
     </HBox>
     
     <HBox spacing="10" alignment="CENTER">
-        <Button text="1" prefWidth="50" font="$FONT" onAction="#processNumpad" />
-        <Button text="2" prefWidth="50" font="$FONT" onAction="#processNumpad" />
-        <Button text="3" prefWidth="50" font="$FONT" onAction="#processNumpad" />
+        <Button text="7" prefWidth="50" font="$FONT" onAction="#processNumpad" />
+        <Button text="8" prefWidth="50" font="$FONT" onAction="#processNumpad" />
+        <Button text="9" prefWidth="50" font="$FONT" onAction="#processNumpad" />
         <Button text="-" prefWidth="50" font="$FONT" onAction="#processOperator" />
     </HBox>
     
     <HBox spacing="10" alignment="CENTER">
-        <Button text="0" prefWidth="50" font="$FONT" onAction="#processNumpad" />
-        <Button text="S" prefWidth="50" font="$FONT" onAction="#switchScene" />
+        <Button text="0" prefWidth="110" font="$FONT" onAction="#processNumpad" />
         <Button text="=" prefWidth="50" font="$FONT" onAction="#processOperator" />
         <Button text="+" prefWidth="50" font="$FONT" onAction="#processOperator" />
     </HBox>

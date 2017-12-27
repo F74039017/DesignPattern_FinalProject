@@ -1,4 +1,4 @@
-package sqlite;
+package org.imslab.sqlite;
 
 
 // Facade pattern. Useful for add operator db.

@@ -1,4 +1,4 @@
-package sqlite.command;
+package org.imslab.sqlite.command;
 
 import java.sql.Connection;
 import java.sql.Statement;

@@ -1,4 +1,4 @@
-package sqlite.command;
+package org.imslab.sqlite.command;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import sqlite.DB;
+import org.imslab.sqlite.DB;
 
 public class Broker {
 
@@ -46,10 +46,10 @@ public class Broker {
 		}
 	}
 	
-	public ResultSet execQuery(String sql) throws Exception {
+	public ResultSet execQuery(String tableName) throws Exception {
 		if (checkConn()) {
 			Statement statement = connection.createStatement();
-			return statement.executeQuery(sql);
+			return statement.executeQuery(String.format("SELECT * FROM %s;", tableName));
 		}
 		else {
 			throw new Exception("Not Connected to database yet.");
