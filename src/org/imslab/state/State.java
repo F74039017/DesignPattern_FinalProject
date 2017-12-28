@@ -1,20 +1,28 @@
 package org.imslab.state;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyEvent;
+import javafx.event.ActionEvent;
 
-public class State {
+public abstract class State implements Processable {
 		
 	protected Context context;
-	
+	protected String name;
 	protected Map<Function<Context, Boolean>, State> transition;
+	protected List<State> validNextState = null;
 	
-	public State() {
+	private State() {
 		transition = new HashMap<>();
+		validNextState = new ArrayList<>();
+	}
+	
+	public State(String name) {
+		this();
+		this.name = name;
 	}
 
 	/**
@@ -40,6 +48,7 @@ public class State {
 	 */
 	public void registerTransition(Function<Context, Boolean> f, State s) {
 		transition.put(f, s);
+		validNextState.add(s);
 	}
 
 	/**
@@ -49,7 +58,9 @@ public class State {
 	 */
 	public void changeToState(State state) {
 		state.setContext(this.context);
+		context.setValidNextState(state.getValidNextState());
 		context.setCurrentState(state);
+		System.out.println("Change to state: " + state.toString());
 	}
 
 	public Context getContext() {
@@ -59,5 +70,35 @@ public class State {
 	public void setContext(Context context) {
 		this.context = context;
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public List<State> getValidNextState() {
+		return validNextState;
+	}
+
+	private void setValidNextState(List<State> validNextState) {
+		this.validNextState = validNextState;
+	}
+	
+	/**
+	 * Process the action event and check whether it need to change state.
+	 * @param actionEvent
+	 */
+	public void process(ActionEvent actionEvent) {
+		doAction(actionEvent, context);
+		checkAndChangeState();
+	}
+	
+	/**
+	 * State subclass should override this class to deal with the ui action event.
+	 */
+	abstract public void doAction(ActionEvent actionEvent, Context context);
 	
 }

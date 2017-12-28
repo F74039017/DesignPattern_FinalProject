@@ -15,11 +15,30 @@ public class SceneManager {
 	
 	private Stage primaryStage;
 	private Map<String, Scene> sceneMap;
+	private Scene currentScene;
+	
+	// Singleton pattern
+	private static SceneManager sceneManager = null;
 		
-	public SceneManager(Stage primaryStage) {
+	private SceneManager(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		sceneMap = new HashMap<>();
 		initAllScene();
+	}
+	
+	public static SceneManager getInstance(Stage primaryStage) {
+		if (sceneManager == null) {
+			sceneManager = new SceneManager(primaryStage);
+		}
+		return sceneManager;
+	}
+	
+	public static SceneManager getInstance() {
+		if (sceneManager == null) {
+			System.err.println("SceneManager hasn't been initialized yet.");
+			System.exit(1);
+		}
+		return sceneManager;
 	}
 	
 	private void initAllScene() {
@@ -32,7 +51,8 @@ public class SceneManager {
 		}
 		
 		if (existScene(SceneConfig.DEFAULT_SCENE)) {
-			primaryStage.setScene(sceneMap.get(SceneConfig.DEFAULT_SCENE));
+			currentScene = sceneMap.get(SceneConfig.DEFAULT_SCENE);
+			primaryStage.setScene(currentScene);
 		}
 		else {
 			System.err.println("Can not found default scene.");
@@ -48,7 +68,7 @@ public class SceneManager {
 	 */
 	private Scene createScene(String url) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
-		loader.setControllerFactory(t -> new Controller(this)); // pass parameters to Controller
+		loader.setControllerFactory(t -> Controller.getInstance()); // pass parameters to Controller
 		Parent root = loader.load();
 		return new Scene(root);
 	}
@@ -91,6 +111,7 @@ public class SceneManager {
 	 * @param sceneName
 	 */
 	public void switchScene(String sceneName) {
+		currentScene = sceneMap.get(sceneName);
 		primaryStage.setScene(sceneMap.get(sceneName));
 	}
 }

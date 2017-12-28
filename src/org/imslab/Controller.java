@@ -5,65 +5,50 @@ import org.imslab.state.StateManager;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Controller {
 	
-	private StateManager StateManager;
+	private StateManager stateManager;
+	private SceneManager sceneManager;
+	
+	@FXML
+	public Text output;	
+	
 
-    @FXML
-    private Text output;
-
-    private long number1 = 0;
-    private String operator = "";
-    private boolean start = true;
-
+    // XXX: Model acts as a DB? Replace it with DB?
     private Model model = new Model();
     
-    public Controller() {
-		// TODO Auto-generated constructor stub
-	}
+    private static Controller controller = null;
+
+    private Controller() {
+    		System.out.println("Create Controller");
+    		stateManager = StateManager.getInstance();
+    }
     
-    public Controller(SceneManager sceneManager) {
-    		// Wrap sceneManager in the stateManager.
-    		StateManager = new StateManager(sceneManager);
+    // This will be invoked by SceneManager indirectly.
+    public static Controller getInstance() {
+    		if (controller == null) {
+			controller = new Controller();
+		}
+    		return controller;
+    }
+    
+    public void initialize(Stage primaryStage) {
+    		sceneManager = SceneManager.getInstance(primaryStage);
+    		stateManager = StateManager.getInstance();
+    		primaryStage.show();
     }
 
-    @FXML
-    private void processNumpad(ActionEvent event) {
-        if (start) {
-            output.setText("");
-            start = false;
-        }
-
-        String value = ((Button)event.getSource()).getText();
-        output.setText(output.getText() + value);
-    }
-
-    @FXML
-    private void processOperator(ActionEvent event) {
-        String value = ((Button)event.getSource()).getText();
-
-        if (!"=".equals(value)) {
-            if (!operator.isEmpty())
-                return;
-
-            operator = value;
-            number1 = Long.parseLong(output.getText());
-            output.setText("");
-        }
-        else {
-            if (operator.isEmpty())
-                return;
-
-            output.setText(String.valueOf(model.calculate(number1, Long.parseLong(output.getText()), operator)));
-            operator = "";
-            start = true;
-        }
-    }
-
-	@FXML public void switchScene() {
-//		sceneManager.switchScene("ui2");
+	@FXML
+	public void process(ActionEvent event) {
+		stateManager.getCurrentState().process(event);
 	}
+
+	@FXML public void processNumpad(ActionEvent event) {process(event);}
+
+	@FXML public void processOperator() {}
+
+	@FXML public void switchScene() {}
 }
