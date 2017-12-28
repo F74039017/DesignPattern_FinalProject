@@ -8,6 +8,9 @@ import java.util.List;
 
 import org.imslab.sqlite.DB;
 
+/**
+ * TODO: Broker can use state pattern.
+ */
 public class Broker {
 
 	protected Connection connection = null;

@@ -12,7 +12,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.paint.Color?>
 
-<VBox spacing="10" alignment="CENTER" prefWidth="300" prefHeight="300" fx:controller="org.imslab.Controller" xmlns:fx="http://javafx.com/fxml">
+<VBox spacing="10" alignment="CENTER" prefWidth="300" prefHeight="300" fx:controller="org.imslab.LoginController" xmlns:fx="http://javafx.com/fxml">
     <fx:define>
         <Font fx:id="FONT" size="18" />
     </fx:define>
@@ -45,7 +45,7 @@
     
     <HBox spacing="10" alignment="CENTER">
         <Button text="0" prefWidth="50" font="$FONT" onAction="#processNumpad" />
-        <Button text="S" prefWidth="50" font="$FONT" onAction="#switchScene" />
+        <Button text="S" prefWidth="50" font="$FONT" onAction="#processNumpad" />
         <Button text="=" prefWidth="50" font="$FONT" onAction="#processOperator" />
         <Button text="+" prefWidth="50" font="$FONT" onAction="#processOperator" />
     </HBox>

@@ -26,7 +26,7 @@ public class SceneManager {
 		initAllScene();
 	}
 	
-	public static SceneManager getInstance(Stage primaryStage) {
+	public static SceneManager setPrimaryStage(Stage primaryStage) {
 		if (sceneManager == null) {
 			sceneManager = new SceneManager(primaryStage);
 		}
@@ -35,7 +35,7 @@ public class SceneManager {
 	
 	public static SceneManager getInstance() {
 		if (sceneManager == null) {
-			System.err.println("SceneManager hasn't been initialized yet.");
+			System.err.println("Primary stage not set yet.");
 			System.exit(1);
 		}
 		return sceneManager;
@@ -44,9 +44,9 @@ public class SceneManager {
 	private void initAllScene() {
 		for (String string : SceneConfig.FXML_LIST) {
 			try {
-				addScene(string);
+				addScene(SceneConfig.relativeBasePath+string);
 			} catch (Exception e) {
-				System.err.println("IOExcpetion when create scene "+string);
+				e.printStackTrace();
 			}
 		}
 		
@@ -68,7 +68,6 @@ public class SceneManager {
 	 */
 	private Scene createScene(String url) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
-		loader.setControllerFactory(t -> Controller.getInstance()); // pass parameters to Controller
 		Parent root = loader.load();
 		return new Scene(root);
 	}

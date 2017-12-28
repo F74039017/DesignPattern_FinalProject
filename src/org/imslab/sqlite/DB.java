@@ -1,12 +1,11 @@
 package org.imslab.sqlite;
 
 
-// Facade pattern. Useful for add operator db.
+/**
+ * Database configuration class
+ */
 public class DB {
 
 	public static final String CONN_NAME = "jdbc:sqlite:question.db";
-	
-	// Command pattern.
-	
 	
 }

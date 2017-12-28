@@ -8,6 +8,11 @@ import java.util.function.Function;
 
 import javafx.event.ActionEvent;
 
+/**
+ * TODO: Use state pattern in broker class.
+ * The behavior of execMod() & execQuery() is different according to different states. 
+ * e.g. Not connect to db, normal, not reset after exec().
+ */
 public abstract class State implements Processable {
 		
 	protected Context context;
