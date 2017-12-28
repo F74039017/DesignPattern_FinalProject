@@ -1,7 +1,5 @@
 package org.imslab.sqlite;
 
-
-import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,7 +34,7 @@ public class SqliteTest {
 			
 			for(int i=0; i<rs.size(); i++) {
 				HashMap<String, String> map = rs.get(i);
-				System.out.println(String.format("%s %s", map.get("FIELD1"), map.get("FIELD2")));
+				System.out.println(String.format("%s %s %s", map.get("ID"), map.get("FIELD1"), map.get("FIELD2")));
 			}
 			
 			// print all result

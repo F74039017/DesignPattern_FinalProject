@@ -27,7 +27,7 @@ public class CreateTableCmd extends ModifyCommand {
 		try {
 			statement.executeUpdate(buildStatement());		
 		} catch (Exception e) {
-			System.out.println(String.format("Table %s had already been created.", args.get(0)));
+			System.err.println(String.format("Table %s had already been created.", args.get(0)));
 		}
 	}
 	

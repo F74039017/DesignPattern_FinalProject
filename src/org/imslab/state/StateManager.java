@@ -1,18 +1,26 @@
-package org.imslab.sqlite;
+package org.imslab.state;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import org.imslab.state.Context;
-import org.imslab.state.State;
+import org.imslab.scene.SceneManager;
 
+/**
+ * Control the states and swtich between different scenes.
+ */
 public class StateManager {
 	
 	private Map<String, State> stateMap;
+	private SceneManager sceneManager;
 	
 	public StateManager() {
 		stateMap = new HashMap<>();
+	}
+	
+	public StateManager(SceneManager sceneManager) {
+		this();
+		this.sceneManager = sceneManager;
 	}
 	
 	/**

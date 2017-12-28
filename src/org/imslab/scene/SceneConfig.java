@@ -1,4 +1,4 @@
-package org.imslab;
+package org.imslab.scene;
 
 public class SceneConfig {
 	

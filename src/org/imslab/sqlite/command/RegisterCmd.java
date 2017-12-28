@@ -1,6 +1,7 @@
 package org.imslab.sqlite.command;
 
 import java.security.MessageDigest;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class RegisterCmd extends ModifyCommand {
@@ -24,6 +25,11 @@ public class RegisterCmd extends ModifyCommand {
 			throw new Exception("Register command need exactly two args");
 		}
 		
+		ResultSet rs = (new SelectCmd("Account", "ID", "--", "NAME", args.get(0))).exec(statement);
+		if (rs.next()) {
+			System.err.println(args.get(0) + " was be created!!");
+			return;
+		}
 		// use dependent command
 	}
 	

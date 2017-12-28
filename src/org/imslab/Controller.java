@@ -1,5 +1,8 @@
 package org.imslab;
 
+import org.imslab.scene.SceneManager;
+import org.imslab.state.StateManager;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,7 +10,7 @@ import javafx.scene.text.Text;
 
 public class Controller {
 	
-	private SceneManager sceneManager;
+	private StateManager StateManager;
 
     @FXML
     private Text output;
@@ -23,7 +26,8 @@ public class Controller {
 	}
     
     public Controller(SceneManager sceneManager) {
-    		this.sceneManager = sceneManager;
+    		// Wrap sceneManager in the stateManager.
+    		StateManager = new StateManager(sceneManager);
     }
 
     @FXML
@@ -60,6 +64,6 @@ public class Controller {
     }
 
 	@FXML public void switchScene() {
-		sceneManager.switchScene("ui2");
+//		sceneManager.switchScene("ui2");
 	}
 }

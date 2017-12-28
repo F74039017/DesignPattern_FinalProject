@@ -1,8 +1,10 @@
-package org.imslab;
+package org.imslab.scene;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.imslab.Controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -46,7 +48,7 @@ public class SceneManager {
 	 */
 	private Scene createScene(String url) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
-		loader.setControllerFactory(t -> new Controller(this));
+		loader.setControllerFactory(t -> new Controller(this)); // pass parameters to Controller
 		Parent root = loader.load();
 		return new Scene(root);
 	}
