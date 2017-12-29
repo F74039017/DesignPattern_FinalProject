@@ -1,4 +1,4 @@
-package org.imslab;
+package org.imslab.controller;
 
 import org.imslab.scene.SceneManager;
 
@@ -16,12 +16,10 @@ public class LoginController extends Controller {
 		super(name);
 	}
 
-	@FXML public void processNumpad() {
-		System.out.println("Process number in LoginController");
-	}
-
-	@FXML public void processOperator() {
-		SceneManager.getInstance().switchScene("ui2");
+	@FXML 
+	public void processLogin() {
+		//sql驗證
+		SceneManager.getInstance().switchScene("Generator");
 	}
 
 	

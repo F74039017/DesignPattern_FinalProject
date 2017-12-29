@@ -2,9 +2,9 @@ package org.imslab.sqlite.command;
 
 import java.sql.Statement;
 
-public class CreateProblemTableCmd extends ModifyCommand {
+public abstract class CreateQuestionTableCmd extends ModifyCommand {
 
-	private static String tableName = "Problem";
+	private static String tableName = null;
 	private static String contentField = "CONTENT";
 	private static String lvField = "LV";
 	private static String selectFieldA = "SA";
@@ -14,11 +14,16 @@ public class CreateProblemTableCmd extends ModifyCommand {
 	
 
 	/**
-	 * Table name and field is static. All args will be ignored.
-	 * @param args
+	 * Pass tableName parameter to create the question table for the specific subject.
+	 * @param args   arg[0] = table name of the subject
 	 */
-	public CreateProblemTableCmd(String... args) {
-		super("CreateProblemTable", args);
+	public CreateQuestionTableCmd(String... args) {
+		super("CreateQuestionTableCmd", args);
+		if (this.args.size() != 1) {
+			System.err.println("CreateQuestionTableCmd need tableName argument");
+			System.exit(1);
+		}
+		tableName = this.args.get(0);
 		addDependentCmd(new CreateTableCmd(tableName, contentField, lvField, 
 						selectFieldA, selectFieldB, selectFieldC, selectFieldD));
 	}

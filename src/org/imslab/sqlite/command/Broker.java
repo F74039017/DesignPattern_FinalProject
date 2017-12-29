@@ -2,6 +2,7 @@ package org.imslab.sqlite.command;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,8 +27,14 @@ public class Broker {
 		}
 	}
 	
-	public void addCommand(ModifyCommand cmd) {
+	/**
+	 * Add command to the commandList. This function supports cascading style.
+	 * @param cmd
+	 * @return
+	 */
+	public Broker addCommand(ModifyCommand cmd) {
 		commandList.add(cmd);
+		return this;
 	}
 	
 	/**
@@ -73,6 +80,10 @@ public class Broker {
 	
 	public void clearCommandList() {
 		commandList.clear();
+	}
+	
+	public void close() throws SQLException {
+		connection.close();
 	}
 	
 }

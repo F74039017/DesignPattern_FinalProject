@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.imslab.Controller;
+import org.imslab.controller.Controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

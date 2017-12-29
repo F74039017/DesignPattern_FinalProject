@@ -2,11 +2,13 @@ package org.imslab.sqlite.command;
 
 import java.sql.Statement;
 
+import org.imslab.sqlite.DB;
+
 public class CreateAccountTableCmd extends ModifyCommand {
 
-	public static String tableName = "Account";
-	public static String nameField = "NAME";
-	public static String passwordField = "PASSWORD";
+	public static String tableName = DB.ACCOUNT_TABLENAME;
+	public static String nameField = DB.ACCOUNT_NAME;
+	public static String passwordField = DB.ACCOUNT_PASSWORD;
 
 	/**
 	 * Table name and field is static. All args will be ignored.

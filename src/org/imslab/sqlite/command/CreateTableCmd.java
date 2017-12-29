@@ -8,7 +8,7 @@ public class CreateTableCmd extends ModifyCommand {
 	 * Statement primary field named "ID".
 	 * All fields use type "TEXT"
 	 */
-	private String sqlTemplateBegin = "CREATE TABLE %s " +
+	private String sqlTemplateBegin = "CREATE TABLE IF NOT EXISTS %s " +
 			            "(ID INTEGER PRIMARY KEY AUTOINCREMENT,";
 	private String sqlTemplateEnd = " %s TEXT NOT NULL)"; 
 	private String appendFieldTemplate = " %s TEXT NOT NULL,";
@@ -27,7 +27,7 @@ public class CreateTableCmd extends ModifyCommand {
 		try {
 			statement.executeUpdate(buildStatement());		
 		} catch (Exception e) {
-			System.err.println(String.format("Table %s had already been created.", args.get(0)));
+			e.printStackTrace();
 		}
 	}
 	

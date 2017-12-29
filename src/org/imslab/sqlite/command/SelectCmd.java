@@ -38,6 +38,10 @@ public class SelectCmd extends QueryCommand {
 	 * @throws Exception 
 	 */
 	private void initKVList() throws Exception {
+		if (!hasWhereClause) {
+			return;
+		}
+		
 		int i;
 		for(i=whereIndex+1; i<args.size(); i++) {
 			if ((i-whereIndex)%2!=0) {
@@ -48,7 +52,7 @@ public class SelectCmd extends QueryCommand {
 			}
 		}
 		
-		if ((i-whereIndex)%2==0) {
+		if ((i-whereIndex)%2==0 || whereIndex==args.size()-1) {
 			throw new Exception("SelectCmd: Wrong number of where_clause's parameters.");
 		}
 	}
@@ -71,29 +75,38 @@ public class SelectCmd extends QueryCommand {
 		// prepare where clause parameters.
 		initKVList();
 		
-		int appendEndSize = whereIndex;
+		int appendEndIndex;
 		
-		// Query all columns
-		if (!hasWhereClause && args.size() == 1) {
-			args.add("*");
-		} else if (hasWhereClause && appendEndSize==1) {
-			args.add(1, "*");
-			appendEndSize++;
+		if (hasWhereClause) {
+			if (whereIndex == 1) {
+				// Query all columns
+				args.add(1, "*");
+				appendEndIndex = 2;
+			} else {
+				appendEndIndex = whereIndex;
+			}
+		} else {
+			if (args.size() ==1) {
+				args.add("*");
+				appendEndIndex = 2;
+			} else {
+				appendEndIndex = args.size();
+			}
 		}
 		
 		String ret = sqlTemplateBegin;
-		for(int i=1; i<appendEndSize-1; i++) {
+		for(int i=1; i<appendEndIndex-1; i++) {
 			ret += String.format(appendFieldTemplate, args.get(i));
 		}
-		ret += String.format(appendFieldTemplateEnd, args.get(appendEndSize-1), args.get(0));
+		ret += String.format(appendFieldTemplateEnd, args.get(appendEndIndex-1), args.get(0));
 		
 		if (hasWhereClause) {
 			ret += whereTemplateBegin;
 			for(int i=0; i<ValueList.size()-1; i++) {
 				ret += String.format(appendWhereFieldTemplate, KeyList.get(i), ValueList.get(i));
 			}
+			ret += String.format(appendWhereFieldTemplateEnd, KeyList.get(KeyList.size()-1), ValueList.get(ValueList.size()-1));
 		}
-		ret += String.format(appendWhereFieldTemplateEnd, KeyList.get(KeyList.size()-1), ValueList.get(ValueList.size()-1));
 		
 		// debug
 		System.out.println(ret);

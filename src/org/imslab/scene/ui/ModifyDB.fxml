@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.imslab.controller.ModifyDBController">
+   <children>
+      <Label layoutX="25.0" layoutY="25.0" text="Question Bank">
+         <font>
+            <Font name="Verdana" size="24.0" />
+         </font></Label>
+      <TabPane layoutY="71.0" prefHeight="580.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="chineseTab" closable="false" text="Chinese">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ChoiceBox fx:id="chineseLevelOption" layoutX="60.0" layoutY="35.0" prefWidth="150.0" />
+                        <TableView fx:id="chineseProblemTable" layoutX="60.0" layoutY="90.0" prefHeight="430.0" prefWidth="580.0">
+                          <columns>
+                              <TableColumn prefWidth="75.0" text="No." />
+                              <TableColumn prefWidth="504.0" text="Content" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="chineseAddButton" layoutX="350.0" layoutY="35.0" mnemonicParsing="false" onAction="#processAdd" prefWidth="70.0" text="Add">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="chineseSearchButton" layoutX="250.0" layoutY="35.0" mnemonicParsing="false" prefWidth="70.0" text="Search">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="chineseEditButton" layoutX="450.0" layoutY="35.0" mnemonicParsing="false" onAction="#processEdit" prefWidth="70.0" text="Edit">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="chineseDelButton" layoutX="550.0" layoutY="35.0" mnemonicParsing="false" onAction="#processDel" prefWidth="70.0" text="Delete">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="englishTab" text="English">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="englishProblemTable" layoutX="60.0" layoutY="90.0" prefHeight="430.0" prefWidth="580.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="No." />
+                              <TableColumn prefWidth="504.0" text="Content" />
+                           </columns>
+                        </TableView>
+                        <ChoiceBox fx:id="englishLevelOption" layoutX="60.0" layoutY="35.0" prefWidth="150.0" />
+                        <Button fx:id="englishSearchButton" layoutX="250.0" layoutY="35.0" mnemonicParsing="false" prefWidth="70.0" text="Search">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="englishAddButton" layoutX="350.0" layoutY="35.0" mnemonicParsing="false" onAction="#processAdd" prefWidth="70.0" text="Add">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="englishDelButton" layoutX="550.0" layoutY="35.0" mnemonicParsing="false" onAction="#processDel" prefWidth="70.0" text="Delete">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="englishEditButton" layoutX="450.0" layoutY="35.0" mnemonicParsing="false" onAction="#processEdit" prefWidth="70.0" text="Edit">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+            <Tab fx:id="mathTab" text="Math">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="mathProblemTable" layoutX="60.0" layoutY="90.0" prefHeight="430.0" prefWidth="580.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="No." />
+                              <TableColumn prefWidth="504.0" text="Content" />
+                           </columns>
+                        </TableView>
+                        <ChoiceBox fx:id="mathLevelOption" layoutX="60.0" layoutY="35.0" prefWidth="150.0" />
+                        <Button fx:id="mathSearchButton" layoutX="250.0" layoutY="35.0" mnemonicParsing="false" prefWidth="70.0" text="Search">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="mathAddButton" layoutX="350.0" layoutY="35.0" mnemonicParsing="false" onAction="#processAdd" prefWidth="70.0" text="Add">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="mathDelButton" layoutX="550.0" layoutY="35.0" mnemonicParsing="false" onAction="#processDel" prefWidth="70.0" text="Delete">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="mathEditButton" layoutX="450.0" layoutY="35.0" mnemonicParsing="false" onAction="#processEdit" prefWidth="70.0" text="Edit">
+                           <font>
+                              <Font name="Verdana" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button fx:id="backButton" layoutX="600.0" layoutY="655.0" mnemonicParsing="false" onAction="#processBack" prefWidth="80.0" text="Back">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Button>
+      <Button fx:id="logoutButton" layoutX="600.0" layoutY="25.0" mnemonicParsing="false" onAction="#processLogout" prefWidth="80.0" text="Logout">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Button>
+   </children>
+</AnchorPane>

@@ -1,6 +1,6 @@
-package org.imslab;
+package org.imslab.controller;
 
-public class Controller {
+public abstract class Controller {
 
 	private String name;
 	

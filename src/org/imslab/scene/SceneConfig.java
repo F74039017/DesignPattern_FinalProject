@@ -5,9 +5,15 @@ public class SceneConfig {
 	public static final String relativeBasePath = "ui/";
 	
 	public static final String[] FXML_LIST = {
-			"ui.fxml",
-			"ui2.fxml"
+			"Login.fxml",
+			"Generator.fxml",
+			"SheetPreview.fxml",
+			"Register.fxml",
+			"ModifyDB.fxml",
+			"AddProblem.fxml",
+			"EditProblem.fxml",
+			"DeleteProblem.fxml"
 	};
 	
-	public static final String DEFAULT_SCENE = "ui";
+	public static final String DEFAULT_SCENE = "Login";
 }

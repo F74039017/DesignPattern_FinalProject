@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.imslab.controller.RegisterController">
+   <children>
+      <Label fx:id="idText" layoutX="210.0" layoutY="120.0" text="ID :" textAlignment="RIGHT">
+         <font>
+            <Font name="Verdana" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="pwdText" layoutX="146.0" layoutY="180.0" text="Password :">
+         <font>
+            <Font name="Verdana" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="registerButton" layoutX="314.0" layoutY="240.0" mnemonicParsing="false" onAction="#processRegister" text="Register">
+         <font>
+            <Font name="Verdana" size="18.0" />
+         </font>
+      </Button>
+      <TextField fx:id="userName" layoutX="267.0" layoutY="120.0" />
+      <PasswordField fx:id="password" layoutX="267.0" layoutY="180.0" />
+      <Button fx:id="backButton" layoutX="605.0" layoutY="24.0" mnemonicParsing="false" onAction="#processBack" text="Back">
+         <font>
+            <Font name="Verdana" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
