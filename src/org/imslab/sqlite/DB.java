@@ -14,6 +14,9 @@ public class DB {
 	public static final String ACCOUNT_USERNAME = "NAME";
 	public static final String ACCOUNT_PASSWORD = "PASSWORD";
 	
+	public static final String ACCOUNT_DEFAULT_USERNAME = "admin";
+	public static final String ACCOUNT_DEFAULT_PASSWORD = "admin";
+	
 	// Question Common fields
 	public static final String QUESION_CONTENT = "CONTENT";
 	public static final String QUESTION_LV = "LV";

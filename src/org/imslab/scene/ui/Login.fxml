@@ -22,7 +22,7 @@
             <Font name="Verdana" size="18.0" />
          </font>
       </Button>
-      <TextField fx:id="userName" layoutX="267.0" layoutY="120.0" />
-      <PasswordField fx:id="password" layoutX="267.0" layoutY="180.0" />
+      <TextField fx:id="userName" layoutX="267.0" layoutY="120.0" onKeyPressed="#processKeyEvent"/>
+      <PasswordField fx:id="password" layoutX="267.0" layoutY="180.0" onKeyPressed="#processKeyEvent"/>
    </children>
 </AnchorPane>

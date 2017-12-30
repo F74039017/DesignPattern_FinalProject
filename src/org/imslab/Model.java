@@ -25,6 +25,13 @@ public class Model {
 		
 	private Model() {
 		initTable();
+		
+		// Default user
+		try {
+			broker.addCommand(new RegisterCmd(DB.ACCOUNT_DEFAULT_USERNAME, DB.ACCOUNT_DEFAULT_PASSWORD)).execMod();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static Model getInstance() {
@@ -54,6 +61,9 @@ public class Model {
 	
 	public boolean checkPassword(String name, String password) throws Exception {
 		List<HashMap<String, String>> rs = broker.execQuery(new SelectPassword(name));
+		if (rs.size()==0) {
+			return false;
+		}
 		String md5Code = rs.get(0).get(DB.ACCOUNT_PASSWORD);
 //		System.out.println(String.format("%s password check %s %s", name, RegisterCmd.md5(password), md5Code));
 		return RegisterCmd.md5(password).equals(md5Code);
