@@ -2,9 +2,9 @@ package org.imslab.sqlite.command.createTable;
 
 import java.sql.Statement;
 
-import org.imslab.sqlite.command.AbstractQuestionCmd;
+import org.imslab.sqlite.command.AbstractModQuestionCmd;
 
-public abstract class CreateQuestionTableCmd extends AbstractQuestionCmd {
+public abstract class CreateQuestionTableCmd extends AbstractModQuestionCmd {
 
 	/**
 	 * Pass tableName parameter to create the question table for the specific subject.
@@ -18,8 +18,9 @@ public abstract class CreateQuestionTableCmd extends AbstractQuestionCmd {
 	}
 
 	@Override
-	public void exec(Statement statement) throws Exception {
+	public boolean exec(Statement statement) throws Exception {
 		// use dependent command
+		return true;
 	}
 		
 }

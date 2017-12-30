@@ -7,7 +7,7 @@ import org.imslab.sqlite.DB;
 /**
  * Subclass invokes super(cmdName, tableName) to set the tableName and appendCommand() to achieve the goal.  
  */
-public abstract class AbstractQuestionCmd extends ModifyCommand {
+public abstract class AbstractModQuestionCmd extends ModifyCommand {
 
 	protected String tableName = null;
 	protected String contentField = DB.QUESION_CONTENT;
@@ -23,14 +23,15 @@ public abstract class AbstractQuestionCmd extends ModifyCommand {
 	 * @param cmdName 
 	 * @param tableName
 	 */
-	public AbstractQuestionCmd(String cmdName, String tableName) {
+	public AbstractModQuestionCmd(String cmdName, String tableName) {
 		super(cmdName);
 		this.tableName = tableName;
 	}
 
 	@Override
-	public void exec(Statement statement) throws Exception {
+	public boolean exec(Statement statement) throws Exception {
 		// use dependent command
+		return true;
 	}
 		
 }

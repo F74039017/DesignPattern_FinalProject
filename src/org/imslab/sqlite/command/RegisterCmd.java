@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import org.imslab.sqlite.command.insert.InsertCmd;
+import org.imslab.sqlite.command.select.SelectCmd;
 
 public class RegisterCmd extends ModifyCommand {
 	
@@ -22,24 +23,30 @@ public class RegisterCmd extends ModifyCommand {
 	}
 
 	@Override
-	public void exec(Statement statement) throws Exception {
+	public boolean exec(Statement statement) throws Exception {
 		if (args.size() != 2) {
 			throw new Exception("Register command need exactly two args");
 		}
 		
 		ResultSet rs = (new SelectCmd("Account", "ID", "--", "NAME", args.get(0))).exec(statement);
 		if (rs.next()) {
-			System.err.println(args.get(0) + " was be created!!");
-			return;
+			System.err.println(args.get(0) + " has been registered!!");
+			return false;
 		}
 		// use dependent command
+		return true;
 	}
 	
-	private String md5(String str) {
+	/**
+	 * Digest key string and encode with md5 algorithm.
+	 * @param keyStr
+	 * @return  encode keyStr
+	 */
+	public static String md5(String keyStr) {
 		String md5=null;
 		try {
 			MessageDigest md=MessageDigest.getInstance("MD5");
-			byte[] barr=md.digest(str.getBytes());
+			byte[] barr=md.digest(keyStr.getBytes());
 			StringBuffer sb=new StringBuffer();  
 			for (int i=0; i < barr.length; i++) {
 				sb.append(byte2Hex(barr[i]));

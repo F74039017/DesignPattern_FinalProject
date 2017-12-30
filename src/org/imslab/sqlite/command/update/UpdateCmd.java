@@ -1,8 +1,10 @@
-package org.imslab.sqlite.command;
+package org.imslab.sqlite.command.update;
 
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.imslab.sqlite.command.ModifyCommand;
 
 public class UpdateCmd extends ModifyCommand {
 
@@ -81,8 +83,9 @@ public class UpdateCmd extends ModifyCommand {
 	}
 
 	@Override
-	public void exec(Statement statement) throws Exception {
+	public boolean exec(Statement statement) throws Exception {
 		statement.executeUpdate(buildStatement());
+		return true;
 	}
 	
 	/**

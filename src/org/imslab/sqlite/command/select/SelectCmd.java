@@ -1,9 +1,11 @@
-package org.imslab.sqlite.command;
+package org.imslab.sqlite.command.select;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.imslab.sqlite.command.QueryCommand;
 
 public class SelectCmd extends QueryCommand {
 
@@ -11,7 +13,7 @@ public class SelectCmd extends QueryCommand {
 	private String appendFieldTemplate = "%s, "; // field
 	private String appendFieldTemplateEnd = "%s FROM %s"; // field, tableName 
 	private String whereTemplateBegin = " WHERE ";
-	private String appendWhereFieldTemplate = "%s=\"%s\", ";
+	private String appendWhereFieldTemplate = "%s=\"%s\" OR ";
 	private String appendWhereFieldTemplateEnd = "%s=\"%s\";";
 	
 	private List<String> KeyList = null;
@@ -21,7 +23,7 @@ public class SelectCmd extends QueryCommand {
 	
 	/**
 	 * Select fields from table.
-	 * Where Table="FieldValue" follow the "--" annotation in form of <Where_table> <Where_field>.
+	 * Notice: Where clause supports 'OR' operator only.
 	 * If only one parameter is passed to the constructor, then it will query all columns of the table.
 	 * @param args    <Table> <Field> ... "--" <Where_Table> <Where_Field>
 	 */

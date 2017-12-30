@@ -1,8 +1,10 @@
-package org.imslab.sqlite.command;
+package org.imslab.sqlite.command.delete;
 
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.imslab.sqlite.command.ModifyCommand;
 
 public class DeleteCmd extends ModifyCommand {
 
@@ -40,8 +42,9 @@ public class DeleteCmd extends ModifyCommand {
 	}
 
 	@Override
-	public void exec(Statement statement) throws Exception {
-		statement.executeUpdate(buildStatement());		
+	public boolean exec(Statement statement) throws Exception {
+		statement.executeUpdate(buildStatement());
+		return true;
 	}
 	
 	/**

@@ -31,8 +31,9 @@ public class InsertCmd extends ModifyCommand {
 	}
 
 	@Override
-	public void exec(Statement statement) throws Exception {
-		statement.executeUpdate(buildStatement());		
+	public boolean exec(Statement statement) throws Exception {
+		statement.executeUpdate(buildStatement());
+		return true;
 	}
 	
 	private void initKVList() {

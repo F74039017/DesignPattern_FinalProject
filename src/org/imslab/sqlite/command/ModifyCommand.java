@@ -23,7 +23,7 @@ public abstract class ModifyCommand extends Command implements ModifyExec {
 	 * @param statement
 	 * @return
 	 */
-	abstract public void exec(Statement statement) throws Exception;
+	abstract public boolean exec(Statement statement) throws Exception;
 	
 	/**
 	 * Create the statement from the connection and exec(),
@@ -39,10 +39,10 @@ public abstract class ModifyCommand extends Command implements ModifyExec {
 			throw new Exception("Null Connection");
 		
 		Statement statement = conn.createStatement();
-		exec(statement);
-		
-		// Reuse the statement object to faster the program.
-		cascadingExec(statement);
+		if (exec(statement)) {
+			// Reuse the statement object to faster the program.
+			cascadingExec(statement);			
+		}
 		
 		// close statement by root
 		statement.close(); 

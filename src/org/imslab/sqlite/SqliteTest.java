@@ -1,19 +1,18 @@
 package org.imslab.sqlite;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.imslab.question.ChineseQuestionCmdFactory;
 import org.imslab.question.Question;
+import org.imslab.question.QuestionCmdFactory;
 import org.imslab.sqlite.command.*;
-import org.imslab.sqlite.command.createTable.CreateAccountTableCmd;
-import org.imslab.sqlite.command.createTable.CreateChineseQuestionTableCmd;
-import org.imslab.sqlite.command.createTable.CreateEnglishQuestionTableCmd;
-import org.imslab.sqlite.command.createTable.CreateMathQuestionTableCmd;
-import org.imslab.sqlite.command.createTable.CreateTableCmd;
-import org.imslab.sqlite.command.insert.InsertChineseQuestionCmd;
-import org.imslab.sqlite.command.insert.InsertCmd;
-import org.imslab.sqlite.command.insert.InsertEnglishQuestionCmd;
-import org.imslab.sqlite.command.insert.InsertMathQuestionCmd;
+import org.imslab.sqlite.command.createTable.*;
+import org.imslab.sqlite.command.delete.*;
+import org.imslab.sqlite.command.insert.*;
+import org.imslab.sqlite.command.select.*;
+import org.imslab.sqlite.command.update.*;
 
 public class SqliteTest {
 
@@ -44,20 +43,32 @@ public class SqliteTest {
 												 .sd("d")
 												 .build();
 		
-		broker.addCommand(new InsertChineseQuestionCmd(question))
-			  .addCommand(new InsertEnglishQuestionCmd(question))
-			  .addCommand(new InsertMathQuestionCmd(question));
+		QuestionCmdFactory factory = new ChineseQuestionCmdFactory();
+		broker.addCommand(factory.getInsertQuestionCmd(question));
+		
+		question = new Question.Builder().content("Hello World")
+				 .id(4)
+				 .lv("2")
+				 .sa("aa")
+				 .sb("bb")
+				 .sc("cc")
+				 .sd("dd")
+				 .build();
+		broker.addCommand(new UpdateChineseQuestionCmd(question));
 		
 		List<HashMap<String, String>> rs;
 		try {
 			broker.execMod();
 			
 			// query test
-			rs = broker.execQuery(new SelectCmd("IMSLAB", "--", "FIELD2", "QQQ"));
+			List<String> lvList = new ArrayList<>();
+			lvList.add("3");
+			lvList.add("5");
+			rs = broker.execQuery(new SelectChineseQuestionCmd(lvList));
 			
 			for(int i=0; i<rs.size(); i++) {
 				HashMap<String, String> map = rs.get(i);
-				System.out.println(String.format("%s %s %s", map.get("ID"), map.get("FIELD1"), map.get("FIELD2")));
+				System.out.println(String.format("%s %s %s", map.get("ID"), map.get("SA"), map.get("SB")));
 			}
 			
 		} catch (Exception e) {

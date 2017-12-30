@@ -7,6 +7,7 @@ package org.imslab.sqlite;
 public class DB {
 
 	public static final String CONN_NAME = "jdbc:sqlite:question.db";
+	public static final String PRIMARY_FIELD = "ID";
 	
 	// Account
 	public static final String ACCOUNT_TABLENAME = "Account";
@@ -16,6 +17,8 @@ public class DB {
 	// Question Common fields
 	public static final String QUESION_CONTENT = "CONTENT";
 	public static final String QUESTION_LV = "LV";
+	public static final int QUESION_LV_MIN = 1;
+	public static final int QUESION_LV_MAX = 5;
 	public static final String QUESTION_SELECTA = "SA";
 	public static final String QUESTION_SELECTB = "SB";
 	public static final String QUESTION_SELECTC = "SC";

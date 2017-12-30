@@ -24,10 +24,6 @@ public class Model {
 	/* Model function */
 	
 	public void addQuestion(Question question) throws Exception {
-		if (question.getId()!=-1) {
-			throw new Exception("Question with id != -1 can't be added to database");
-		}
-		
 		
 	}
 	

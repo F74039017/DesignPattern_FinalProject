@@ -21,8 +21,9 @@ public class CreateAccountTableCmd extends ModifyCommand {
 	}
 
 	@Override
-	public void exec(Statement statement) throws Exception {
+	public boolean exec(Statement statement) throws Exception {
 		// use dependent command
+		return true;
 	}
 		
 }

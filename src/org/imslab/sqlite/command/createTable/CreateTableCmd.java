@@ -25,11 +25,13 @@ public class CreateTableCmd extends ModifyCommand {
 	}
 
 	@Override
-	public void exec(Statement statement) {
+	public boolean exec(Statement statement) {
 		try {
-			statement.executeUpdate(buildStatement());		
+			statement.executeUpdate(buildStatement());
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 	
