@@ -1,8 +1,9 @@
-package org.imslab.sqlite.command;
+package org.imslab.sqlite.command.createTable;
 
 import java.sql.Statement;
 
 import org.imslab.sqlite.DB;
+import org.imslab.sqlite.command.ModifyCommand;
 
 public class CreateAccountTableCmd extends ModifyCommand {
 
@@ -14,8 +15,8 @@ public class CreateAccountTableCmd extends ModifyCommand {
 	 * Table name and field is static. All args will be ignored.
 	 * @param args  null
 	 */
-	public CreateAccountTableCmd(String... args) {
-		super("CreateAccountTable", args);
+	public CreateAccountTableCmd() {
+		super("CreateAccountTable");
 		addDependentCmd(new CreateTableCmd(tableName, nameField, passwordField));
 	}
 

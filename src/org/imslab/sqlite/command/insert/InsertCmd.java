@@ -1,8 +1,10 @@
-package org.imslab.sqlite.command;
+package org.imslab.sqlite.command.insert;
 
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.imslab.sqlite.command.ModifyCommand;
 
 public class InsertCmd extends ModifyCommand {
 

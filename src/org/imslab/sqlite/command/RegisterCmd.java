@@ -4,6 +4,8 @@ import java.security.MessageDigest;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import org.imslab.sqlite.command.insert.InsertCmd;
+
 public class RegisterCmd extends ModifyCommand {
 	
 	private static String tableName = "Account";

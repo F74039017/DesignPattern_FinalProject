@@ -1,6 +1,8 @@
-package org.imslab.sqlite.command;
+package org.imslab.sqlite.command.createTable;
 
 import java.sql.Statement;
+
+import org.imslab.sqlite.command.ModifyCommand;
 
 public class CreateTableCmd extends ModifyCommand {
 

@@ -1,10 +1,10 @@
-package org.imslab.sqlite.command;
+package org.imslab.sqlite.command.createTable;
 
 import org.imslab.sqlite.DB;
 
 public class CreateEnglishQuestionTableCmd extends CreateQuestionTableCmd {
 
 	public CreateEnglishQuestionTableCmd() {
-		super(DB.ENGLISH_TABLENAME);
+		super("CreateEnglishQuestionTableCmd", DB.ENGLISH_TABLENAME);
 	}
 }

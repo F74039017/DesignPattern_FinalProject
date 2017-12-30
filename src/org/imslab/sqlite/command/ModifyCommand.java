@@ -9,6 +9,10 @@ public abstract class ModifyCommand extends Command implements ModifyExec {
 
 	protected List<ModifyCommand> dependentCmdList = null;
 	
+	public ModifyCommand(String name) {
+		this(name, new String[0]); // zero size array
+	}
+	
 	public ModifyCommand(String name, String[] args) {
 		super(name, args);
 		dependentCmdList = new ArrayList<>();
