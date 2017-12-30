@@ -11,7 +11,7 @@ public class DB {
 	
 	// Account
 	public static final String ACCOUNT_TABLENAME = "Account";
-	public static final String ACCOUNT_NAME = "NAME";
+	public static final String ACCOUNT_USERNAME = "NAME";
 	public static final String ACCOUNT_PASSWORD = "PASSWORD";
 	
 	// Question Common fields

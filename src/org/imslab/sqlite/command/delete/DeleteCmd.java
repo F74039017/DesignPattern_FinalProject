@@ -18,7 +18,7 @@ public class DeleteCmd extends ModifyCommand {
 	
 	/**
 	 * Delete fields from table.
-	 * @param args    <Table> <Where_Table> <Where_Field> ...
+	 * @param args    [Table] [Where_Table] [Where_Field] ...
 	 */
 	public DeleteCmd(String... args) {
 		super("DeleteCmd", args);

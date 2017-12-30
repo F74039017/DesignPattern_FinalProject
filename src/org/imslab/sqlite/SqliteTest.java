@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.imslab.Model;
 import org.imslab.question.ChineseQuestionCmdFactory;
 import org.imslab.question.Question;
 import org.imslab.question.QuestionCmdFactory;
@@ -29,6 +30,14 @@ public class SqliteTest {
 		// account test
 		broker.addCommand(new CreateAccountTableCmd())
 			  .addCommand(new RegisterCmd("Terry", "123456"));
+		
+		Model model = Model.getInstance();
+		try {
+			System.out.println(model.checkPassword("Terry", "123456"));
+			System.out.println(model.checkPassword("Terry", "234567"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		// question test
 		broker.addCommand(new CreateChineseQuestionTableCmd())

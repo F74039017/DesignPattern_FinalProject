@@ -25,7 +25,7 @@ public class SelectCmd extends QueryCommand {
 	 * Select fields from table.
 	 * Notice: Where clause supports 'OR' operator only.
 	 * If only one parameter is passed to the constructor, then it will query all columns of the table.
-	 * @param args    <Table> <Field> ... "--" <Where_Table> <Where_Field>
+	 * @param args    [Table] [Field] ... "--" [Where_Table] [Where_Field]
 	 */
 	public SelectCmd(String... args) {
 		super("QueryCmd", args);

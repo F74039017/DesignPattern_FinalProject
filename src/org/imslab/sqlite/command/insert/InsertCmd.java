@@ -22,7 +22,7 @@ public class InsertCmd extends ModifyCommand {
 	
 	/**
 	 * Insert the data to the specific table.
-	 * @param args    <Table> <Key1> <Value1> <Key2> <Value2>
+	 * @param args    [Table] [Key1] [Value1] [Key2] [Value2]
 	 */
 	public InsertCmd(String... args) {
 		super("CreateTable", args);

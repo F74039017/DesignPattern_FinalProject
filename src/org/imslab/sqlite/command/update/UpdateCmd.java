@@ -29,7 +29,7 @@ public class UpdateCmd extends ModifyCommand {
 	/**
 	 * Update fields from table.
 	 * Where Table="FieldValue" follow the "--" annotation in form of <Where_table> <Where_field>.
-	 * @param args    <Table> <Field> ... "--" <Where_Table> <Where_Field>
+	 * @param args    [Table] [Field] ... "--" [Where_Table] [Where_Field]
 	 */
 	public UpdateCmd(String... args) {
 		super("UpdateCmd", args);

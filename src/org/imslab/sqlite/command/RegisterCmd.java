@@ -15,7 +15,7 @@ public class RegisterCmd extends ModifyCommand {
 	
 	/**
 	 * Register account
-	 * @param args    <Name> <Password>
+	 * @param args    [Name] [Password]
 	 */
 	public RegisterCmd(String... args) {
 		super("RegisterCmd", args);

@@ -18,7 +18,7 @@ public class CreateTableCmd extends ModifyCommand {
 	/**
 	 * Table's fields are defined by the constructor parameters.
 	 * Once the instance created, it can't be modified.
-	 * @param args    <Table> <Field1> <Field2>
+	 * @param args    [Table] [Field1] [Field2]
 	 */
 	public CreateTableCmd(String... args) {
 		super("CreateTable", args);
