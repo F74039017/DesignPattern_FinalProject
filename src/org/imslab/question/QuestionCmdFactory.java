@@ -14,7 +14,7 @@ import org.imslab.sqlite.command.update.UpdateQuestionCmd;
  */
 public interface QuestionCmdFactory {
 	
-	abstract CreateQuestionTableCmd getQuestionTableCmd();
+	abstract CreateQuestionTableCmd getCreateQuestionTableCmd();
 	
 	abstract InsertQuestionCmd getInsertQuestionCmd(Question question);
 	

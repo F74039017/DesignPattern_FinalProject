@@ -1,17 +1,15 @@
 package org.imslab.controller;
 
+import org.imslab.ChineseData;
+import org.imslab.EnglishData;
+import org.imslab.MathData;
 import org.imslab.Model;
-import org.imslab.question.Question;
+import org.imslab.SubjectData;
 import org.imslab.scene.SceneManager;
-import org.imslab.sqlite.DB;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TabPane;
@@ -24,11 +22,7 @@ public class ModifyDBController extends Controller
 	@FXML ChoiceBox chineseLevelOption;
 	@FXML ChoiceBox englishLevelOption;
 	@FXML ChoiceBox mathLevelOption;
-	// 5 level
-	private ObservableList<String> chineseLvItemList = FXCollections.observableArrayList("1", "2", "3", "4", "5");
-	private ObservableList<String> englishLvItemList = FXCollections.observableArrayList("1", "2", "3", "4", "5");
-	private ObservableList<String> mathLvItemList = FXCollections.observableArrayList("1", "2", "3", "4", "5");
-	
+
 	@FXML Tab chineseTab;
 	@FXML TableView chineseProblemTable;
 	@FXML Button chineseAddButton;
@@ -66,22 +60,17 @@ public class ModifyDBController extends Controller
 	
 	@FXML
 	private void initialize() {
-		chineseLevelOption.setItems(chineseLvItemList);
-		chineseLevelOption.setValue("1");
-		englishLevelOption.setItems(englishLvItemList);
-		englishLevelOption.setValue("1");
-		mathLevelOption.setItems(mathLvItemList);
-		mathLevelOption.setValue("1");
+		ChineseData chineseData = new ChineseData(new SubjectData.OperandBuilder().levelOption(chineseLevelOption)
+				.noColumn(chineseNoCol).contentColumn(chineseContentCol).problemTable(chineseProblemTable).build());
+		model.setChineseData(chineseData);
+		EnglishData englishData = new EnglishData(new SubjectData.OperandBuilder().levelOption(englishLevelOption)
+				.noColumn(englishNoCol).contentColumn(englishContentCol).problemTable(englishProblemTable).build());
+		model.setEnglishData(englishData);
+		MathData mathData = new MathData(new SubjectData.OperandBuilder().levelOption(mathLevelOption)
+				.noColumn(mathNoCol).contentColumn(mathContentCol).problemTable(mathProblemTable).build());
+		model.setMathData(mathData);
 		
-		chineseNoCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-		chineseContentCol.setCellValueFactory(new PropertyValueFactory<>("content"));
-		chineseProblemTable.setItems(Model.getInstance().getChineseQuestionList());
-		englishNoCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-		englishContentCol.setCellValueFactory(new PropertyValueFactory<>("content"));
-		englishProblemTable.setItems(Model.getInstance().getEnglishQuestionList());
-		mathNoCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-		mathContentCol.setCellValueFactory(new PropertyValueFactory<>("content"));
-		mathProblemTable.setItems(Model.getInstance().getMathQuestionList());	
+		model.setCurrentData(chineseData);
 	}
 	
 	public ModifyDBController(String name) {
@@ -117,15 +106,19 @@ public class ModifyDBController extends Controller
 	}
 
 	@FXML public void selectEnglishTab() {
-		model.setCurrentModQuestionTable(DB.ENGLISH_TABLENAME);
+		model.setCurrentData(model.getEnglishData());
 	}
 
 	@FXML public void selectChineseTab() {
-		model.setCurrentModQuestionTable(DB.CHINESE_TABLENAME);
+		model.setCurrentData(model.getChineseData());
 	}
 
 	@FXML public void selectMathTab() {
-		model.setCurrentModQuestionTable(DB.MATH_TABLENAME);
+		model.setCurrentData(model.getMathData());
+	}
+
+	@FXML public void choiceBoxPressed() {
+		System.out.println("Check");
 	}
 
 	

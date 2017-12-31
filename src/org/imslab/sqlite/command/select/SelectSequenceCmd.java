@@ -32,9 +32,9 @@ public class SelectSequenceCmd extends QueryCommand {
 		
 		// select all columns
 		paramList.add(squenceTableName);
-		paramList.add(seqenceField); // get password
+		paramList.add(seqenceField); 
 		paramList.add("--");
-		paramList.add(targetTableNameField); // where userName is matched
+		paramList.add(targetTableNameField);
 		paramList.add(targetTableName);
 		
 		return (new SelectCmd(paramList.stream().toArray(String[]::new))).exec(statement);

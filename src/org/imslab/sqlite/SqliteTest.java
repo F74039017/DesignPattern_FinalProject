@@ -19,8 +19,6 @@ public class SqliteTest {
 
 	public static void main( String args[] ) {
 		
-		System.out.println(Model.getInstance().getNextAutoIncrementId("haha"));
-			
 		Broker broker = new Broker();
 		
 		// basic test

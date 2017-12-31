@@ -11,7 +11,7 @@ import org.imslab.sqlite.command.update.*;
 public class EnglishQuestionCmdFactory implements QuestionCmdFactory {
 	
 	@Override
-	public CreateQuestionTableCmd getQuestionTableCmd() {
+	public CreateQuestionTableCmd getCreateQuestionTableCmd() {
 		return new CreateEnglishQuestionTableCmd();
 	}
 

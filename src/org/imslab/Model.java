@@ -9,32 +9,25 @@ import org.imslab.sqlite.DB;
 import org.imslab.sqlite.command.Broker;
 import org.imslab.sqlite.command.RegisterCmd;
 import org.imslab.sqlite.command.createTable.CreateAccountTableCmd;
-import org.imslab.sqlite.command.createTable.CreateChineseQuestionTableCmd;
-import org.imslab.sqlite.command.createTable.CreateEnglishQuestionTableCmd;
-import org.imslab.sqlite.command.createTable.CreateMathQuestionTableCmd;
 import org.imslab.sqlite.command.select.SelectPasswordCmd;
 import org.imslab.sqlite.command.select.SelectSequenceCmd;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class Model {
 	
 	/* Common data */
 	private String userName = "Unknown";
 	private Broker broker = new Broker();
-	// ModifyDBController set it for targeting database table
-	private String currentModQuestionTable = DB.CHINESE_TABLENAME; 
 	
-	private ObservableList<Question> chineseQuestionList = FXCollections.observableArrayList();
-	private ObservableList<Question> englishQuestionList = FXCollections.observableArrayList();
-	private ObservableList<Question> mathQuestionList = FXCollections.observableArrayList();
+	private SubjectData currentData = null;
+	private ChineseData chineseData = null;
+	private EnglishData englishData = null;
+	private MathData mathData = null;
 	
 	/* Singleton pattern */
 	private static Model model = null;
 		
 	private Model() {
-		initTable();
+		init();
 		
 		// Default user
 		try {
@@ -51,11 +44,8 @@ public class Model {
 		return model;
 	}
 	
-	private void initTable() {
-		broker.addCommand(new CreateAccountTableCmd())
-			  .addCommand(new CreateChineseQuestionTableCmd())
-			  .addCommand(new CreateEnglishQuestionTableCmd())
-			  .addCommand(new CreateMathQuestionTableCmd());
+	private void init() {
+		broker.addCommand(new CreateAccountTableCmd());
 		try {
 			broker.execMod();
 		} catch (Exception e) {
@@ -81,8 +71,8 @@ public class Model {
 	
 	public void addQuestion(Question question) {
 		try {
-			broker.addCommand(QuestionCmdFactory.getFactoryByTableName(question.getSubjectTable())
-					.getInsertQuestionCmd(question)).execMod();
+			broker.addCommand(currentData.getFactory().getInsertQuestionCmd(question)).execMod();
+			currentData.getQuestionList().add(question);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -121,28 +111,6 @@ public class Model {
 			return null;
 		}
 	}
-
-	
-	/**
-	 * Give table name to get the next insert id.
-	 * @param cmd
-	 * @return  next insert id of the table.
-	 */
-	public String getNextAutoIncrementId(String tableName) {
-		try {
-			List<HashMap<String, String>> rs;
-			rs = broker.execQuery(new SelectSequenceCmd(tableName));
-			if (rs.size()==0) {
-				throw new Exception("No "+ tableName +" table ?\nEmpty result of the sequence query.");
-			}
-			return String.valueOf(Integer.parseInt(rs.get(0).get(DB.SQLITE_SEQUENCE_SEQUENCE))+1);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(1);
-			// this won't be returned.
-			return null;
-		}
-	}
 	
 	/* Accessors */
 	
@@ -154,26 +122,36 @@ public class Model {
 		this.userName = userName;
 	}
 
-	public ObservableList<Question> getChineseQuestionList() {
-		return chineseQuestionList;
+	public SubjectData getCurrentData() {
+		return currentData;
 	}
 
-	public ObservableList<Question> getEnglishQuestionList() {
-		return englishQuestionList;
+	public void setCurrentData(SubjectData currentData) {
+		this.currentData = currentData;
 	}
 
-	public ObservableList<Question> getMathQuestionList() {
-		return mathQuestionList;
+	public ChineseData getChineseData() {
+		return chineseData;
 	}
 
-	public String getCurrentModQuestionTable() {
-		return currentModQuestionTable;
+	public void setChineseData(ChineseData chineseData) {
+		this.chineseData = chineseData;
 	}
 
-	public void setCurrentModQuestionTable(String currentModQuestionTable) {
-		// debug
-		System.out.println("Target question table " + currentModQuestionTable);
-		this.currentModQuestionTable = currentModQuestionTable;
+	public EnglishData getEnglishData() {
+		return englishData;
+	}
+
+	public void setEnglishData(EnglishData englishData) {
+		this.englishData = englishData;
+	}
+
+	public MathData getMathData() {
+		return mathData;
+	}
+
+	public void setMathData(MathData mathData) {
+		this.mathData = mathData;
 	}
 
 }

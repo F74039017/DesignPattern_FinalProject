@@ -31,18 +31,15 @@ public class AddController extends Controller
 	@FXML 
 	public void processAdd() {
 		//prepare
-		Question question = new Question.Builder().id(model.getNextAutoIncrementId(model.getCurrentModQuestionTable()))
+		Question question = new Question.Builder().id(model.getCurrentData().getNextAutoIncrementId())
+												 .lv(model.getCurrentData().getCurrentLv())
 				 								 .content(problemContent.getText())
 				 								 .sa(optionAContent.getText())
 				 								 .sb(optionBContent.getText())
 				 								 .sc(optionAContent.getText())
 				 								 .sd(optionDContent.getText())
-				 								 .subjectTable(model.getCurrentModQuestionTable())
+				 								 .subjectTable(model.getCurrentData().getSubjectTableName())
 				 								 .build();
-		
-		// ui
-		model.getChineseQuestionList().add(question);
-		
 		// sql insert
 		model.addQuestion(question);
 		
@@ -59,7 +56,7 @@ public class AddController extends Controller
 		problemContent.setText("");
 		optionAContent.setText("");
 		optionBContent.setText("");
-		optionAContent.setText("");
+		optionCContent.setText("");
 		optionDContent.setText("");
 	}
 	
