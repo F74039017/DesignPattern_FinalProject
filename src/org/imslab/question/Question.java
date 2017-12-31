@@ -1,14 +1,29 @@
 package org.imslab.question;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.imslab.sqlite.DB;
+
+import javafx.beans.property.SimpleStringProperty;
+
 public class Question {
 	
-	protected int id;
-	protected String content="";
-	protected String lv="";
-	protected String sa="", sb="", sc="", sd="";
+	protected SimpleStringProperty id;
+	protected SimpleStringProperty content;
+	protected SimpleStringProperty lv;
+	protected SimpleStringProperty sa, sb, sc, sd;
+	protected String subjectTable = null;
 	
 	public Question() {
-		id = -1;
+		id = new SimpleStringProperty("-1");
+		content = new SimpleStringProperty("");
+		lv = new SimpleStringProperty("");
+		sa = new SimpleStringProperty("");
+		sb = new SimpleStringProperty("");
+		sc = new SimpleStringProperty("");
+		sd = new SimpleStringProperty("");
 	}
 	
 	/**
@@ -21,60 +36,94 @@ public class Question {
 	
 	/* Accessors */
 
-	public int getId() {
-		return id;
+	public String getId() {
+		return id.get();
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(String id) {
+		this.id.set(id);
 	}
 
 	public String getContent() {
-		return content;
+		return content.get();
 	}
 
 	public void setContent(String content) {
-		this.content = content;
+		this.content.set(content);
 	}
 
 	public String getLv() {
-		return lv;
+		return lv.get();
 	}
 
 	public void setLv(String lv) {
-		this.lv = lv;
+		this.lv.set(lv);
 	}
 
 	public String getSa() {
-		return sa;
+		return sa.get();
 	}
 
 	public void setSa(String sa) {
-		this.sa = sa;
+		this.sa.set(sa);
 	}
 
 	public String getSb() {
-		return sb;
+		return sb.get();
 	}
 
 	public void setSb(String sb) {
-		this.sb = sb;
+		this.sb.set(sb);
 	}
 
 	public String getSc() {
-		return sc;
+		return sc.get();
 	}
 
 	public void setSc(String sc) {
-		this.sc = sc;
+		this.sc.set(sc);
 	}
 
 	public String getSd() {
-		return sd;
+		return sd.get();
 	}
 
 	public void setSd(String sd) {
-		this.sd = sd;
+		this.sd.set(sd);
+	}
+
+	public String getSubjectTable() {
+		return subjectTable;
+	}
+
+	public void setSubjectTable(String subjectTable) {
+		this.subjectTable = subjectTable;
+	}
+
+	
+	/* Helper function */
+	
+	/**
+	 * Digest the sql results and create questions list.
+	 * @param rs
+	 * @param subjectTable   Table name of subject
+	 * @return
+	 */
+	public static List<Question> digestSqlResult(List<HashMap<String, String>> rs, String subjectTable) {
+		List<Question> qList = new ArrayList<>();
+		for (HashMap<String, String> map : rs) {
+			Question question = new Question.Builder().id(map.get(DB.PRIMARY_FIELD))
+													 .content(map.get(DB.QUESION_CONTENT))
+													 .lv(map.get(DB.QUESTION_LV))
+													 .sa(map.get(DB.QUESTION_SELECTA))
+													 .sb(map.get(DB.QUESTION_SELECTB))
+													 .sc(map.get(DB.QUESTION_SELECTC))
+													 .sd(map.get(DB.QUESTION_SELECTD))
+													 .subjectTable(subjectTable)
+													 .build();
+			qList.add(question);
+		}
+		return qList;
 	}
 	
 	
@@ -89,7 +138,7 @@ public class Question {
 			question = new Question();
 		}
 		
-		public Builder id(int id) {
+		public Builder id(String id) {
 			question.setId(id);
 			return this;
 		}
@@ -124,10 +173,15 @@ public class Question {
 			return this;
 		}
 		
+		public Builder subjectTable(String subjectTable) {
+			question.setSubjectTable(subjectTable);
+			return this;
+		}
+		
 		public Question build() {
 			return question;
 		}
 		
 	}
-	
+
 }

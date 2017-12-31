@@ -17,7 +17,7 @@
             <Font name="Verdana" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="loginButton" layoutX="314.0" layoutY="240.0" mnemonicParsing="false" onAction="#processLogin" text="Login">
+      <Button fx:id="loginButton" layoutX="314.0" layoutY="240.0" mnemonicParsing="false" onAction="#processLogin" onKeyPressed="#processKeyEvent" text="Login">
          <font>
             <Font name="Verdana" size="18.0" />
          </font>

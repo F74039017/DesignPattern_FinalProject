@@ -18,6 +18,9 @@ import org.imslab.sqlite.command.update.*;
 public class SqliteTest {
 
 	public static void main( String args[] ) {
+		
+		System.out.println(Model.getInstance().getNextAutoIncrementId("haha"));
+			
 		Broker broker = new Broker();
 		
 		// basic test
@@ -56,7 +59,7 @@ public class SqliteTest {
 		broker.addCommand(factory.getInsertQuestionCmd(question));
 		
 		question = new Question.Builder().content("Hello World")
-				 .id(4)
+				 .id("1")
 				 .lv("2")
 				 .sa("aa")
 				 .sb("bb")

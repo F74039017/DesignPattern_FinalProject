@@ -12,15 +12,25 @@ import org.imslab.sqlite.command.createTable.CreateAccountTableCmd;
 import org.imslab.sqlite.command.createTable.CreateChineseQuestionTableCmd;
 import org.imslab.sqlite.command.createTable.CreateEnglishQuestionTableCmd;
 import org.imslab.sqlite.command.createTable.CreateMathQuestionTableCmd;
-import org.imslab.sqlite.command.select.SelectPassword;
+import org.imslab.sqlite.command.select.SelectPasswordCmd;
+import org.imslab.sqlite.command.select.SelectSequenceCmd;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Model {
 	
-	// Common data
+	/* Common data */
 	private String userName = "Unknown";
 	private Broker broker = new Broker();
+	// ModifyDBController set it for targeting database table
+	private String currentModQuestionTable = DB.CHINESE_TABLENAME; 
 	
-	// Singleton pattern
+	private ObservableList<Question> chineseQuestionList = FXCollections.observableArrayList();
+	private ObservableList<Question> englishQuestionList = FXCollections.observableArrayList();
+	private ObservableList<Question> mathQuestionList = FXCollections.observableArrayList();
+	
+	/* Singleton pattern */
 	private static Model model = null;
 		
 	private Model() {
@@ -60,7 +70,7 @@ public class Model {
 	}
 	
 	public boolean checkPassword(String name, String password) throws Exception {
-		List<HashMap<String, String>> rs = broker.execQuery(new SelectPassword(name));
+		List<HashMap<String, String>> rs = broker.execQuery(new SelectPasswordCmd(name));
 		if (rs.size()==0) {
 			return false;
 		}
@@ -69,20 +79,69 @@ public class Model {
 		return RegisterCmd.md5(password).equals(md5Code);
 	}
 	
-	public void addQuestion(QuestionCmdFactory factory, Question question) throws Exception {
-		broker.addCommand(factory.getInsertQuestionCmd(question)).execMod();
+	public void addQuestion(Question question) {
+		try {
+			broker.addCommand(QuestionCmdFactory.getFactoryByTableName(question.getSubjectTable())
+					.getInsertQuestionCmd(question)).execMod();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
 	}
 	
-	public void updateQuestion(QuestionCmdFactory factory, Question question) throws Exception {
-		broker.addCommand(factory.getUpdateQuestionCmd(question)).execMod();
+	public void updateQuestion(Question question) throws Exception {
+		try {
+			broker.addCommand(QuestionCmdFactory.getFactoryByTableName(question.getSubjectTable())
+					.getUpdateQuestionCmd(question)).execMod();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
 	}
 	
-	public void deleteQuestion(QuestionCmdFactory factory, Question question) throws Exception {
-		broker.addCommand(factory.getDeleteQuestionCmd(question)).execMod();
+	public void deleteQuestion(Question question) throws Exception {
+		try {
+			broker.addCommand(QuestionCmdFactory.getFactoryByTableName(question.getSubjectTable())
+					.getDeleteQuestionCmd(question)).execMod();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
 	}
+
+	public List<Question> selectQuestion(String subjectTable, List<String> lvList) throws Exception {
+		try {
+			List<HashMap<String, String>> rs =  broker.execQuery(QuestionCmdFactory.getFactoryByTableName(subjectTable)
+					.getSelectQuestionCmd(lvList));
+			return Question.digestSqlResult(rs, subjectTable);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+			// this won't be executed.
+			return null;
+		}
+	}
+
 	
-	public List<HashMap<String, String>> selectQuestion(QuestionCmdFactory factory, List<String> lvList) throws Exception {
-		return broker.execQuery(factory.getSelectQuestionCmd(lvList));
+	/**
+	 * Give table name to get the next insert id.
+	 * @param cmd
+	 * @return  next insert id of the table.
+	 */
+	public String getNextAutoIncrementId(String tableName) {
+		try {
+			List<HashMap<String, String>> rs;
+			rs = broker.execQuery(new SelectSequenceCmd(tableName));
+			if (rs.size()==0) {
+				throw new Exception("No "+ tableName +" table ?\nEmpty result of the sequence query.");
+			}
+			return String.valueOf(Integer.parseInt(rs.get(0).get(DB.SQLITE_SEQUENCE_SEQUENCE))+1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+			// this won't be returned.
+			return null;
+		}
 	}
 	
 	/* Accessors */
@@ -94,5 +153,27 @@ public class Model {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
+	public ObservableList<Question> getChineseQuestionList() {
+		return chineseQuestionList;
+	}
+
+	public ObservableList<Question> getEnglishQuestionList() {
+		return englishQuestionList;
+	}
+
+	public ObservableList<Question> getMathQuestionList() {
+		return mathQuestionList;
+	}
+
+	public String getCurrentModQuestionTable() {
+		return currentModQuestionTable;
+	}
+
+	public void setCurrentModQuestionTable(String currentModQuestionTable) {
+		// debug
+		System.out.println("Target question table " + currentModQuestionTable);
+		this.currentModQuestionTable = currentModQuestionTable;
+	}
+
 }

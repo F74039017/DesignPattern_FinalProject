@@ -1,13 +1,17 @@
 package org.imslab.sqlite;
 
-
 /**
  * Database configuration class
  */
 public class DB {
-
+	
 	public static final String CONN_NAME = "jdbc:sqlite:question.db";
 	public static final String PRIMARY_FIELD = "ID";
+	
+	// sqlite sequence
+	public static final String SQLITE_SEQUENCE_TABLENAME = "sqlite_sequence";
+	public static final String SQLITE_SEQUENCE_SEQUENCE = "seq";
+	public static final String SQLITE_SEQUENCE_NAME = "name";
 	
 	// Account
 	public static final String ACCOUNT_TABLENAME = "Account";
@@ -35,4 +39,5 @@ public class DB {
 	
 	// Math Question
 	public static final String MATH_TABLENAME = "Math";
+	
 }

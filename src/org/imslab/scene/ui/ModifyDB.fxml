@@ -12,17 +12,17 @@
          <font>
             <Font name="Verdana" size="24.0" />
          </font></Label>
-      <TabPane layoutY="71.0" prefHeight="580.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" layoutY="71.0" prefHeight="580.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="chineseTab" closable="false" text="Chinese">
+          <Tab fx:id="chineseTab" closable="false" onSelectionChanged="#selectChineseTab" text="Chinese">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ChoiceBox fx:id="chineseLevelOption" layoutX="60.0" layoutY="35.0" prefWidth="150.0" />
                         <TableView fx:id="chineseProblemTable" layoutX="60.0" layoutY="90.0" prefHeight="430.0" prefWidth="580.0">
                           <columns>
-                              <TableColumn prefWidth="75.0" text="No." />
-                              <TableColumn prefWidth="504.0" text="Content" />
+                              <TableColumn fx:id="chineseNoCol" prefWidth="75.0" text="No." />
+                              <TableColumn fx:id="chineseContentCol" prefWidth="504.0" text="Content" />
                           </columns>
                         </TableView>
                         <Button fx:id="chineseAddButton" layoutX="350.0" layoutY="35.0" mnemonicParsing="false" onAction="#processAdd" prefWidth="70.0" text="Add">
@@ -49,14 +49,14 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab fx:id="englishTab" text="English">
+          <Tab fx:id="englishTab" onSelectionChanged="#selectEnglishTab" text="English">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <TableView fx:id="englishProblemTable" layoutX="60.0" layoutY="90.0" prefHeight="430.0" prefWidth="580.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="No." />
-                              <TableColumn prefWidth="504.0" text="Content" />
+                              <TableColumn fx:id="englishNoCol" prefWidth="75.0" text="No." />
+                              <TableColumn fx:id="englishContentCol" prefWidth="504.0" text="Content" />
                            </columns>
                         </TableView>
                         <ChoiceBox fx:id="englishLevelOption" layoutX="60.0" layoutY="35.0" prefWidth="150.0" />
@@ -84,14 +84,14 @@
                   </AnchorPane>
                </content>
           </Tab>
-            <Tab fx:id="mathTab" text="Math">
+            <Tab fx:id="mathTab" onSelectionChanged="#selectMathTab" text="Math">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <TableView fx:id="mathProblemTable" layoutX="60.0" layoutY="90.0" prefHeight="430.0" prefWidth="580.0">
                            <columns>
-                              <TableColumn prefWidth="75.0" text="No." />
-                              <TableColumn prefWidth="504.0" text="Content" />
+                              <TableColumn fx:id="mathNoCol" prefWidth="75.0" text="No." />
+                              <TableColumn fx:id="mathContentCol" prefWidth="504.0" text="Content" />
                            </columns>
                         </TableView>
                         <ChoiceBox fx:id="mathLevelOption" layoutX="60.0" layoutY="35.0" prefWidth="150.0" />

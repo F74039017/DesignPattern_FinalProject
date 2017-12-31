@@ -1,14 +1,19 @@
 package org.imslab.controller;
 
+import org.imslab.Model;
 import org.imslab.scene.SceneManager;
+import org.imslab.sqlite.DB;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class GenController extends Controller {
 	
+	private Model model;
+	
 	public GenController() {
 		super();
+		model = Model.getInstance();
 		System.out.println("Create GenController");
 	}
 	
@@ -22,6 +27,7 @@ public class GenController extends Controller {
 	}
 	@FXML 
 	public void processModifyDB() {
+		model.setCurrentModQuestionTable(DB.CHINESE_TABLENAME);
 		SceneManager.getInstance().switchScene("ModifyDB");
 	}
 	@FXML 

@@ -15,7 +15,7 @@ public abstract class DeleteQuestionCmd extends AbstractModQuestionCmd {
 	 */
 	public DeleteQuestionCmd(String cmdName, String tableName, Question question) {
 		super(cmdName, tableName);
-		if (question.getId() == -1 || question.getId()<0) {
+		if (Integer.parseInt(question.getId())<0) {
 			new Exception(this.name + ": empty or negative question id").printStackTrace();
 			System.exit(1);
 		}

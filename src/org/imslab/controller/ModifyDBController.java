@@ -1,6 +1,9 @@
 package org.imslab.controller;
 
+import org.imslab.Model;
+import org.imslab.question.Question;
 import org.imslab.scene.SceneManager;
+import org.imslab.sqlite.DB;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,18 +11,23 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TabPane;
 
 public class ModifyDBController extends Controller
 {
+	private Model model;
+	
 	// FXML
 	@FXML ChoiceBox chineseLevelOption;
 	@FXML ChoiceBox englishLevelOption;
 	@FXML ChoiceBox mathLevelOption;
 	// 5 level
-	ObservableList<String> chineseLvItemList = FXCollections.observableArrayList("1", "2", "3", "4", "5");
-	ObservableList<String> englishLvItemList = FXCollections.observableArrayList("1", "2", "3", "4", "5");
-	ObservableList<String> mathLvItemList = FXCollections.observableArrayList("1", "2", "3", "4", "5");
+	private ObservableList<String> chineseLvItemList = FXCollections.observableArrayList("1", "2", "3", "4", "5");
+	private ObservableList<String> englishLvItemList = FXCollections.observableArrayList("1", "2", "3", "4", "5");
+	private ObservableList<String> mathLvItemList = FXCollections.observableArrayList("1", "2", "3", "4", "5");
 	
 	@FXML Tab chineseTab;
 	@FXML TableView chineseProblemTable;
@@ -41,9 +49,18 @@ public class ModifyDBController extends Controller
 	@FXML Button mathEditButton;
 	@FXML Button backButton;
 	@FXML Button logoutButton;
+	@FXML TableColumn chineseNoCol;
+	@FXML TableColumn chineseContentCol;
+	@FXML TableColumn englishNoCol;
+	@FXML TableColumn englishContentCol;
+	@FXML TableColumn mathNoCol;
+	@FXML TableColumn mathContentCol;
+	@FXML TabPane tabPane;
+	
 
 	public ModifyDBController() {
 		super();
+		model = Model.getInstance();
 		System.out.println("Create ModifyDBController");
 	}
 	
@@ -55,6 +72,16 @@ public class ModifyDBController extends Controller
 		englishLevelOption.setValue("1");
 		mathLevelOption.setItems(mathLvItemList);
 		mathLevelOption.setValue("1");
+		
+		chineseNoCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+		chineseContentCol.setCellValueFactory(new PropertyValueFactory<>("content"));
+		chineseProblemTable.setItems(Model.getInstance().getChineseQuestionList());
+		englishNoCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+		englishContentCol.setCellValueFactory(new PropertyValueFactory<>("content"));
+		englishProblemTable.setItems(Model.getInstance().getEnglishQuestionList());
+		mathNoCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+		mathContentCol.setCellValueFactory(new PropertyValueFactory<>("content"));
+		mathProblemTable.setItems(Model.getInstance().getMathQuestionList());	
 	}
 	
 	public ModifyDBController(String name) {
@@ -66,7 +93,7 @@ public class ModifyDBController extends Controller
 		//sql insert
 		SceneManager.getInstance().switchScene("AddProblem");
 	}
-	
+
 	@FXML 
 	public void processEdit() {
 		//sql update
@@ -87,6 +114,18 @@ public class ModifyDBController extends Controller
 	@FXML 
 	public void processBack() {
 		SceneManager.getInstance().switchScene("Generator");
+	}
+
+	@FXML public void selectEnglishTab() {
+		model.setCurrentModQuestionTable(DB.ENGLISH_TABLENAME);
+	}
+
+	@FXML public void selectChineseTab() {
+		model.setCurrentModQuestionTable(DB.CHINESE_TABLENAME);
+	}
+
+	@FXML public void selectMathTab() {
+		model.setCurrentModQuestionTable(DB.MATH_TABLENAME);
 	}
 
 	

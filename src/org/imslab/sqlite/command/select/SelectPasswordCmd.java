@@ -8,7 +8,7 @@ import java.util.List;
 import org.imslab.sqlite.DB;
 import org.imslab.sqlite.command.QueryCommand;
 
-public class SelectPassword extends QueryCommand {
+public class SelectPasswordCmd extends QueryCommand {
 
 	protected String tableName = DB.ACCOUNT_TABLENAME;	
 	protected String passwordField = DB.ACCOUNT_PASSWORD;
@@ -20,7 +20,7 @@ public class SelectPassword extends QueryCommand {
 	 * Give user name and query the password's md5 code.
 	 * @param userName 
 	 */
-	public SelectPassword(String userName) {
+	public SelectPasswordCmd(String userName) {
 		super("SelectPassword", new String[0]);
 		this.userName = userName;
 	}
