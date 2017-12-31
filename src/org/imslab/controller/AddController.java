@@ -23,10 +23,6 @@ public class AddController extends Controller
 		model = Model.getInstance();
 		System.out.println("Create AddController");
 	}
-	
-	public AddController(String name) {
-		super(name);
-	}
 
 	@FXML 
 	public void processAdd() {

@@ -63,6 +63,11 @@ public class SubjectData {
 		this.subjectTableName = tableName;
 		this.operand = operand;
 		
+		if (operand.hasNullFields()) {
+			new Exception("Operand parameter has null fields");
+			System.exit(1);
+		}
+		
 		// Try to create the question table
 		Broker broker =  new Broker();
 		try {
@@ -98,6 +103,15 @@ public class SubjectData {
 	}
 	
 	/**
+	 * Reset UI relative data
+	 */
+	public void resetUI() {
+		questionList.clear();
+		currentLv = String.valueOf(DB.QUESION_LV_MIN);
+		operand.getLevelOption().setValue(lvItemList.get(0));
+	}
+	
+	/**
 	 * Get the next insert id of the question subject table.
 	 * @param cmd
 	 * @return  next insert id of the table.
@@ -116,6 +130,22 @@ public class SubjectData {
 			// this won't be returned.
 			return null;
 		}
+	}
+	
+	/**
+	 * Return the selected item in the table view.
+	 * @return
+	 */
+	public Question getSelectQuestion() {
+		return (Question)operand.getProblemTable().getSelectionModel().getSelectedItem();
+	}
+	
+	/**
+	 * Return the selected item index in the table view.
+	 * @return
+	 */
+	public int getSelectIndex() {
+		return operand.getProblemTable().getSelectionModel().getSelectedIndex();
 	}
 	
 	/* Accessors */

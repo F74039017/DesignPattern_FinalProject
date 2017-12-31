@@ -6,7 +6,7 @@ import org.imslab.sqlite.DB;
 public class UpdateMathQuestionCmd extends UpdateQuestionCmd {
 
 	public UpdateMathQuestionCmd(Question question) {
-		super("UpdateMathQuestionCmd", DB.CHINESE_TABLENAME, question);
+		super("UpdateMathQuestionCmd", DB.MATH_TABLENAME, question);
 	}
 	
 }

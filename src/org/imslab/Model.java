@@ -10,7 +10,6 @@ import org.imslab.sqlite.command.Broker;
 import org.imslab.sqlite.command.RegisterCmd;
 import org.imslab.sqlite.command.createTable.CreateAccountTableCmd;
 import org.imslab.sqlite.command.select.SelectPasswordCmd;
-import org.imslab.sqlite.command.select.SelectSequenceCmd;
 
 public class Model {
 	
@@ -81,8 +80,7 @@ public class Model {
 	
 	public void updateQuestion(Question question) throws Exception {
 		try {
-			broker.addCommand(QuestionCmdFactory.getFactoryByTableName(question.getSubjectTable())
-					.getUpdateQuestionCmd(question)).execMod();
+			broker.addCommand(currentData.getFactory().getUpdateQuestionCmd(question)).execMod();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -91,19 +89,18 @@ public class Model {
 	
 	public void deleteQuestion(Question question) throws Exception {
 		try {
-			broker.addCommand(QuestionCmdFactory.getFactoryByTableName(question.getSubjectTable())
-					.getDeleteQuestionCmd(question)).execMod();
+			broker.addCommand(currentData.getFactory().getDeleteQuestionCmd(question)).execMod();
+			currentData.getQuestionList().remove(question);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 	}
 
-	public List<Question> selectQuestion(String subjectTable, List<String> lvList) throws Exception {
+	public List<Question> selectQuestion(List<String> lvList) throws Exception {
 		try {
-			List<HashMap<String, String>> rs =  broker.execQuery(QuestionCmdFactory.getFactoryByTableName(subjectTable)
-					.getSelectQuestionCmd(lvList));
-			return Question.digestSqlResult(rs, subjectTable);
+			List<HashMap<String, String>> rs =  broker.execQuery(currentData.getFactory().getSelectQuestionCmd(lvList));
+			return Question.digestSqlResult(rs, currentData.getSubjectTableName());
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);

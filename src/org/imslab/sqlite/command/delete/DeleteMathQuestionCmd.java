@@ -6,7 +6,7 @@ import org.imslab.sqlite.DB;
 public class DeleteMathQuestionCmd extends DeleteQuestionCmd {
 
 	public DeleteMathQuestionCmd(Question question) {
-		super("DeleteMathQuestionCmd", DB.CHINESE_TABLENAME, question);
+		super("DeleteMathQuestionCmd", DB.MATH_TABLENAME, question);
 	}
 	
 }

@@ -26,7 +26,24 @@ public class Question {
 		sd = new SimpleStringProperty("");
 	}
 	
+	// Clone constructor
+	public Question(Question question) {
+		copy(question);
+	}
+	
+	public void copy(Question question) {
+		this.id = question.id;
+		this.content = question.content;
+		this.lv = question.lv;
+		this.sa = question.sa;
+		this.sb = question.sb;
+		this.sc = question.sc;
+		this.sd = question.sd;
+		this.subjectTable = question.subjectTable;
+	}
+	
 	/**
+	 * TODO:
 	 * Return the string which will be printed to the txt file.
 	 * @return   formated content
 	 */

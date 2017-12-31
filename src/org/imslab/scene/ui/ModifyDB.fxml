@@ -18,7 +18,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ChoiceBox fx:id="chineseLevelOption" layoutX="60.0" layoutY="35.0" onMouseReleased="#choiceBoxPressed" prefWidth="150.0" />
+                        <ChoiceBox fx:id="chineseLevelOption" layoutX="60.0" layoutY="35.0" prefWidth="150.0" />
                         <TableView fx:id="chineseProblemTable" layoutX="60.0" layoutY="90.0" prefHeight="430.0" prefWidth="580.0">
                           <columns>
                               <TableColumn fx:id="chineseNoCol" prefWidth="75.0" text="No." />
@@ -30,7 +30,7 @@
                               <Font name="Verdana" size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="chineseSearchButton" layoutX="250.0" layoutY="35.0" mnemonicParsing="false" prefWidth="70.0" text="Search">
+                        <Button fx:id="chineseSearchButton" layoutX="250.0" onAction="#processSearch" layoutY="35.0" mnemonicParsing="false" prefWidth="70.0" text="Search">
                            <font>
                               <Font name="Verdana" size="14.0" />
                            </font>
@@ -60,7 +60,7 @@
                            </columns>
                         </TableView>
                         <ChoiceBox fx:id="englishLevelOption" layoutX="60.0" layoutY="35.0" prefWidth="150.0" />
-                        <Button fx:id="englishSearchButton" layoutX="250.0" layoutY="35.0" mnemonicParsing="false" prefWidth="70.0" text="Search">
+                        <Button fx:id="englishSearchButton" onAction="#processSearch" layoutX="250.0" layoutY="35.0" mnemonicParsing="false" prefWidth="70.0" text="Search">
                            <font>
                               <Font name="Verdana" size="14.0" />
                            </font>
@@ -95,7 +95,7 @@
                            </columns>
                         </TableView>
                         <ChoiceBox fx:id="mathLevelOption" layoutX="60.0" layoutY="35.0" prefWidth="150.0" />
-                        <Button fx:id="mathSearchButton" layoutX="250.0" layoutY="35.0" mnemonicParsing="false" prefWidth="70.0" text="Search">
+                        <Button fx:id="mathSearchButton" layoutX="250.0" onAction="#processSearch" layoutY="35.0" mnemonicParsing="false" prefWidth="70.0" text="Search">
                            <font>
                               <Font name="Verdana" size="14.0" />
                            </font>
@@ -121,7 +121,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="backButton" layoutX="600.0" layoutY="655.0" mnemonicParsing="false" onAction="#processBack" prefWidth="80.0" text="Back">
+      <Button fx:id="backButton" layoutX="600.0" layoutY="655.0" mnemonicParsing="false" prefWidth="80.0" text="Back">
          <font>
             <Font name="Verdana" size="14.0" />
          </font></Button>

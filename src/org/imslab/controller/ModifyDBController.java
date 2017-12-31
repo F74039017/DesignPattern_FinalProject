@@ -1,21 +1,27 @@
 package org.imslab.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.imslab.ChineseData;
 import org.imslab.EnglishData;
 import org.imslab.MathData;
 import org.imslab.Model;
 import org.imslab.SubjectData;
+import org.imslab.question.Question;
 import org.imslab.scene.SceneManager;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TabPane;
 
-public class ModifyDBController extends Controller
-{
+public class ModifyDBController extends Controller {
 	private Model model;
 	
 	// FXML
@@ -73,53 +79,92 @@ public class ModifyDBController extends Controller
 		model.setCurrentData(chineseData);
 	}
 	
-	public ModifyDBController(String name) {
-		super(name);
-	}
-
-	@FXML 
-	public void processAdd() {
-		//sql insert
-		SceneManager.getInstance().switchScene("AddProblem");
-	}
-
-	@FXML 
-	public void processEdit() {
-		//sql update
-		SceneManager.getInstance().switchScene("EditProblem");
+	private void reset() {
+		// prevent initialize problem
+		if (model.getCurrentData() == null) {
+			return;
+		}
+		model.getChineseData().resetUI();
+		model.getEnglishData().resetUI();
+		model.getMathData().resetUI();
+		model.setCurrentData(model.getChineseData());
 	}
 	
-	@FXML 
-	public void processDel() {
-		//sql delete
-		SceneManager.getInstance().switchScene("DeleteProblem");
+	@FXML public void selectEnglishTab() {
+		reset();
+		model.setCurrentData(model.getEnglishData());
+	}
+
+	@FXML public void selectChineseTab() {
+		reset();
+		model.setCurrentData(model.getChineseData());
+	}
+
+	@FXML public void selectMathTab() {
+		reset();
+		model.setCurrentData(model.getMathData());
 	}
 	
 	@FXML 
 	public void processLogout() {
+		reset();
 		SceneManager.getInstance().switchScene("Login");
 	}
 	
 	@FXML 
 	public void processBack() {
+		reset();
 		SceneManager.getInstance().switchScene("Generator");
 	}
-
-	@FXML public void selectEnglishTab() {
-		model.setCurrentData(model.getEnglishData());
+	
+	@FXML public void processSearch() {
+		// clear old data
+		model.getCurrentData().getQuestionList().clear();
+		
+		List<String> lvList = new ArrayList<>();
+		lvList.add(model.getCurrentData().getCurrentLv());
+		try {
+			List<Question> rs = model.selectQuestion(lvList);
+			// append all result
+			model.getCurrentData().getQuestionList().addAll(rs);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
+	
+	@FXML 
+	public void processAdd() {
+		SceneManager.getInstance().switchScene("AddProblem");
 	}
 
-	@FXML public void selectChineseTab() {
-		model.setCurrentData(model.getChineseData());
+	// TODO
+	@FXML 
+	public void processEdit() {
+		// If not selected any question
+		if (model.getCurrentData().getSelectQuestion() == null) {
+			return;
+		}
+		
+		// XXX: This is a little dirty work...
+		// Controller should not be accessed directly.
+		EditController controller = (EditController)SceneManager.getInstance().getController("EditProblem");
+		controller.prepareUI();
+		SceneManager.getInstance().switchScene("EditProblem");
 	}
-
-	@FXML public void selectMathTab() {
-		model.setCurrentData(model.getMathData());
+	
+	@FXML 
+	public void processDel() {
+		// If not selected any question
+		if (model.getCurrentData().getSelectQuestion() == null) {
+			return;
+		}
+		
+		// XXX: This is a little dirty work...
+		// Controller should not be accessed directly.
+		DelController controller = (DelController)SceneManager.getInstance().getController("DeleteProblem");
+		controller.prepareUI();
+		SceneManager.getInstance().switchScene("DeleteProblem");
 	}
-
-	@FXML public void choiceBoxPressed() {
-		System.out.println("Check");
-	}
-
 	
 }
