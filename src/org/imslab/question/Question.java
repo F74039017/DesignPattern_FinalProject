@@ -60,12 +60,16 @@ public class Question {
 	}
 	
 	/**
-	 * TODO:
 	 * Return the string which will be printed to the txt file.
 	 * @return   formated content
 	 */
 	public String format() {
-		return "";
+		return String.format("\t[%s]\t%s\n"
+						   + "\t(a) %s\n"
+						   + "\t(b) %s\n"
+						   + "\t(c) %s\n"
+						   + "\t(d) %s\n",
+						   subjectTable, content.get(), sa.get(), sb.get(), sc.get(), sd.get());
 	}
 	
 	/* Accessors */

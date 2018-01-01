@@ -165,5 +165,18 @@ public class ModifyDBController extends Controller {
 		controller.prepareUI();
 		SceneManager.getInstance().switchScene("DeleteProblem");
 	}
+
+	@FXML public void processDetail() {
+		DetailController controller = (DetailController)SceneManager.getInstance().getController("Detail");
+		Question question = (Question)model.getCurrentData().getSelectQuestion();
+		
+		// TODO: enable the button after user selecting an question?
+		if (question == null) {
+			model.alert("Oops", "Select an quesion first");
+			return;
+		}
+		controller.prepareUI("ModifyDB", question);
+		SceneManager.getInstance().switchScene("Detail");
+	}
 	
 }

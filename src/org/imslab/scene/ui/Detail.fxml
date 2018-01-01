@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.imslab.controller.DetailController">
+   <children>
+      <Label fx:id="DetailProbelmDesc" layoutX="25.0" layoutY="25.0" text="Subject_Level_No.">
+         <font>
+            <Font name="Verdana" size="18.0" />
+         </font></Label>
+      <Label layoutX="60.0" layoutY="100.0" text="Question&#10;Content " textAlignment="CENTER">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label layoutX="60.0" layoutY="353.0" text="Option A">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label layoutX="60.0" layoutY="423.0" text="Option B">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label layoutX="60.0" layoutY="493.0" text="Option C">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Label layoutX="60.0" layoutY="563.0" text="Option D">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Label>
+      <Button fx:id="backButton" layoutX="550.0" layoutY="630.0" mnemonicParsing="false" onAction="#processBack" prefWidth="70.0" text="Back">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font></Button>
+      <Label fx:id="problemContent" alignment="TOP_LEFT" layoutX="150.0" layoutY="100.0" prefHeight="195.0" prefWidth="470.0" text="//////" />
+      <Label fx:id="optionAContent" layoutX="150.0" layoutY="350.0" prefHeight="25.0" prefWidth="470.0" text="descrip" />
+      <Label fx:id="optionBContent" layoutX="150.0" layoutY="420.0" prefHeight="25.0" prefWidth="470.0" text="descrip..." />
+      <Label fx:id="optionCContent" layoutX="150.0" layoutY="490.0" prefHeight="25.0" prefWidth="470.0" text="desc" />
+      <Label fx:id="optionDContent" layoutX="150.0" layoutY="560.0" prefHeight="25.0" prefWidth="470.0" text="instr" />
+   </children>
+</AnchorPane>

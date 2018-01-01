@@ -1,5 +1,8 @@
 package org.imslab.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -15,6 +18,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -56,12 +61,6 @@ public class GenController extends Controller {
 		sheetTable.setItems(questionList);	
 	}
 
-	// TODO:
-	@FXML 
-	public void processPreview() {
-		SceneManager.getInstance().switchScene("SheetPreview");
-	}
-	
 	@FXML 
 	public void processModifyDB() {
 		model.setCurrentData(model.getChineseData());
@@ -184,6 +183,66 @@ public class GenController extends Controller {
 			e.printStackTrace();
 			System.exit(1);
 		}
+	}
+	
+	private void swapQuestion(int a, int b) {
+		Question hold = questionList.get(a);
+		questionList.set(a, questionList.get(b));
+		questionList.set(b, hold);
+	}
+	
+	private void moveQuesion(int fromIndex, int toIndex, Integer lowerBound, int upperBound) {
+		if (toIndex<lowerBound || toIndex>upperBound || fromIndex<lowerBound || fromIndex>upperBound) {
+			return;
+		}
+		swapQuestion(fromIndex, toIndex);
+		sheetTable.getSelectionModel().select(toIndex);
+	}
+
+	@FXML public void processMoveDownButton() {
+		int index = sheetTable.getSelectionModel().getSelectedIndex();
+		moveQuesion(index, index+1, 0, questionList.size()-1);
+	}
+
+	@FXML public void processMoveUpButton() {
+		int index = sheetTable.getSelectionModel().getSelectedIndex();
+		moveQuesion(index, index-1, 0, questionList.size()-1);
+	}
+	
+	@FXML public void processDetailButton() {
+		DetailController controller = (DetailController)SceneManager.getInstance().getController("Detail");
+		Question question = (Question)sheetTable.getSelectionModel().getSelectedItem();
+		
+		// TODO: enable the button after user selecting an question?
+		if (question == null) {
+			model.alert("Oops", "Select an quesion first");
+			return;
+		}
+		controller.prepareUI("Generator", question);
+		SceneManager.getInstance().switchScene("Detail");
+	}
+	
+	// TODO: skip preview scene and save directly?
+	// Change the function name after confirming.
+	@FXML 
+	public void processPreview() {
+		FileChooser fc = new FileChooser();
+	    fc.setTitle("Get Text");
+	    fc.getExtensionFilters().addAll(
+	        new ExtensionFilter("Text Files", "*.txt"),
+	        new ExtensionFilter("All Files", "*.*"));
+	    File file = fc.showSaveDialog(SceneManager.getInstance().getScene("Generator").getWindow());
+	    if (file != null) {
+	    		try (PrintStream ps = new PrintStream(file)) {
+	    			for(int i=0; i<questionList.size(); i++) {
+	    				ps.print(String.valueOf(i+1)+".)"+questionList.get(i).format());
+	    				ps.println();
+	    			}
+	    		} catch (FileNotFoundException e) {
+	    			e.printStackTrace();
+	    		}
+	    }
+//		SceneManager.getInstance().switchScene("SheetPreview");
 	}
 	
 }

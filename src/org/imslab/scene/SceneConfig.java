@@ -12,7 +12,8 @@ public class SceneConfig {
 			"ModifyDB.fxml",
 			"AddProblem.fxml",
 			"EditProblem.fxml",
-			"DeleteProblem.fxml"
+			"DeleteProblem.fxml",
+			"Detail.fxml"
 	};
 	
 	public static final String DEFAULT_SCENE = "Login";
