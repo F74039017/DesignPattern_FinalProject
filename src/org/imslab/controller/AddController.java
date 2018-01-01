@@ -38,6 +38,7 @@ public class AddController extends Controller
 				 								 .build();
 		// sql insert
 		model.addQuestion(question);
+		model.getCurrentData().getQuestionList().add(question);
 		
 		clear();
 		SceneManager.getInstance().switchScene("ModifyDB");

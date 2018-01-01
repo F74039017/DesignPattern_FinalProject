@@ -42,6 +42,23 @@ public class Question {
 		this.subjectTable = question.subjectTable;
 	}
 	
+
+	@Override
+	public String toString() {
+		return String.format("<%s %s>", subjectTable, id.getValue());
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Question) {
+			Question cp = (Question) obj;
+			if (this.id.getValue().equals(cp.id.getValue()) && this.subjectTable.equals(cp.subjectTable)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * TODO:
 	 * Return the string which will be printed to the txt file.

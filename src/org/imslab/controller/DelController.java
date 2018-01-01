@@ -28,6 +28,7 @@ public class DelController extends Controller
 		
 		try {
 			model.deleteQuestion(question);
+			model.getCurrentData().getQuestionList().remove(question);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);

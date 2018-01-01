@@ -13,6 +13,8 @@ import javafx.scene.control.PasswordField;
 
 public class LoginController extends Controller {
 	
+	private Model model;
+	
 	@FXML Label idText;
 	@FXML Label pwdText;
 	@FXML Button loginButton;
@@ -21,6 +23,7 @@ public class LoginController extends Controller {
 
 	public LoginController() {
 		super();
+		model = Model.getInstance();
 		System.out.println("Create LoginController");
 	}
 	
@@ -33,12 +36,27 @@ public class LoginController extends Controller {
 	 */
 	@FXML 
 	public void processLogin() {
+		String alertTitle = "Authentication failed!";
+		if (userName.getText().isEmpty()) {
+			model.alert(alertTitle, "Id can't be empty.");
+			return;
+		}
+		if (password.getText().isEmpty()) {
+			model.alert(alertTitle, "Password can't be empty.");
+			return;
+		}
+		
 		try {
 			if (Model.getInstance().checkPassword(userName.getText(), password.getText())) {
+				
+				// Prepare Generator scene
+				GenController controller = (GenController)SceneManager.getInstance().getController("Generator");
+				controller.prepareUI();
+				
 				SceneManager.getInstance().switchScene("Generator");
 				clear();
 			} else {
-				// TODO: We should show some error message in GUI.
+				model.alert("Authentication failed!", "Wrong user name or password.");
 				System.err.println("Wrong pasword!!");
 			}
 		} catch (Exception e) {

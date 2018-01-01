@@ -121,7 +121,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="backButton" layoutX="600.0" layoutY="655.0" mnemonicParsing="false" prefWidth="80.0" text="Back">
+      <Button fx:id="backButton" onAction="#processBack" layoutX="600.0" layoutY="655.0" mnemonicParsing="false" prefWidth="80.0" text="Back">
          <font>
             <Font name="Verdana" size="14.0" />
          </font></Button>

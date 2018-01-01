@@ -19,8 +19,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
+ * Used for ModifyDB scene originally.
+ * It can be used for other scene to determine which subject should be processed now. 
+ * 
  * Offer a builder to create UI Operand object and pass it to the SubjectData constructor.
- * The constructor will initialize all UI operands and try to create the subject's table. 
+ * The constructor will initialize ModifyScene UI operands and try to create the subject's table. 
  */
 public class SubjectData {
 	
@@ -106,7 +109,11 @@ public class SubjectData {
 	 * Reset UI relative data
 	 */
 	public void resetUI() {
+		
+		// ModifyDB & Generator scenes
 		questionList.clear();
+		
+		// ModifyDB scene
 		currentLv = String.valueOf(DB.QUESION_LV_MIN);
 		operand.getLevelOption().setValue(lvItemList.get(0));
 	}

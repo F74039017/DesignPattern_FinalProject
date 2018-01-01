@@ -31,7 +31,7 @@ public class RegisterCmd extends ModifyCommand {
 		ResultSet rs = (new SelectCmd("Account", "ID", "--", "NAME", args.get(0))).exec(statement);
 		if (rs.next()) {
 			System.err.println(args.get(0) + " has been registered!!");
-			return false;
+			throw new AlreadyRegisteredException(args.get(0) + " has been registered!!");
 		}
 		// use dependent command
 		return true;
@@ -67,5 +67,11 @@ public class RegisterCmd extends ModifyCommand {
 	    		i += 256;
 	    	}
 	    return h[i/16] + h[i%16];
+	}
+	
+	public static class AlreadyRegisteredException extends Exception {
+		public AlreadyRegisteredException(String string) {
+			super(string);
+		}
 	}
 }

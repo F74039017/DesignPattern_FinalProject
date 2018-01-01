@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.imslab.question.Question;
-import org.imslab.question.QuestionCmdFactory;
 import org.imslab.sqlite.DB;
 import org.imslab.sqlite.command.Broker;
 import org.imslab.sqlite.command.RegisterCmd;
 import org.imslab.sqlite.command.createTable.CreateAccountTableCmd;
 import org.imslab.sqlite.command.select.SelectPasswordCmd;
+
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class Model {
 	
@@ -17,6 +19,7 @@ public class Model {
 	private String userName = "Unknown";
 	private Broker broker = new Broker();
 	
+	// ModifyDB
 	private SubjectData currentData = null;
 	private ChineseData chineseData = null;
 	private EnglishData englishData = null;
@@ -31,6 +34,8 @@ public class Model {
 		// Default user
 		try {
 			broker.addCommand(new RegisterCmd(DB.ACCOUNT_DEFAULT_USERNAME, DB.ACCOUNT_DEFAULT_PASSWORD)).execMod();
+		} catch (RegisterCmd.AlreadyRegisteredException e) {
+			// nothing to do.
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -52,10 +57,16 @@ public class Model {
 		}
 	}
 	
-	/* Model function */
+	/* Database function */
 	
-	public void register(String name, String password) throws Exception {
-		broker.addCommand(new RegisterCmd(name, password)).execMod();
+	public boolean register(String name, String password) throws Exception {
+		try {
+			broker.addCommand(new RegisterCmd(name, password)).execMod();
+			return true;
+		} catch (Exception e) {
+			// rethrow exception
+			throw e;
+		} 
 	}
 	
 	public boolean checkPassword(String name, String password) throws Exception {
@@ -71,7 +82,6 @@ public class Model {
 	public void addQuestion(Question question) {
 		try {
 			broker.addCommand(currentData.getFactory().getInsertQuestionCmd(question)).execMod();
-			currentData.getQuestionList().add(question);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -90,7 +100,6 @@ public class Model {
 	public void deleteQuestion(Question question) throws Exception {
 		try {
 			broker.addCommand(currentData.getFactory().getDeleteQuestionCmd(question)).execMod();
-			currentData.getQuestionList().remove(question);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -107,6 +116,34 @@ public class Model {
 			// this won't be executed.
 			return null;
 		}
+	}
+	
+	/* Popup dialog */
+	
+	private void showDialog(Alert alert, String title, String content, String header) {
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(content);
+
+		alert.showAndWait();
+	}
+	
+	public void alert(String title, String content, String header) {
+		Alert alert = new Alert(AlertType.WARNING);
+		showDialog(alert, title, content, header);
+	}
+	
+	public void alert(String title, String content) {
+		alert(title, content, null);
+	}
+	
+	public void info(String title, String content, String header) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		showDialog(alert, title, content, header);
+	}
+	
+	public void info(String title, String content) {
+		info(title, content, null);
 	}
 	
 	/* Accessors */

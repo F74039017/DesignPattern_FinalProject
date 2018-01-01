@@ -138,7 +138,6 @@ public class ModifyDBController extends Controller {
 		SceneManager.getInstance().switchScene("AddProblem");
 	}
 
-	// TODO
 	@FXML 
 	public void processEdit() {
 		// If not selected any question
