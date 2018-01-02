@@ -15,6 +15,7 @@ public class DelController extends Controller
 	@FXML Label optionBContent;
 	@FXML Label optionCContent;
 	@FXML Label optionDContent;
+	@FXML Label delProbelmDesc;
 	
 	public DelController() {
 		super();
@@ -49,6 +50,7 @@ public class DelController extends Controller
 		optionBContent.setText("");
 		optionCContent.setText("");
 		optionDContent.setText("");
+		delProbelmDesc.setText("");
 	}
 	
 	/**
@@ -62,5 +64,6 @@ public class DelController extends Controller
 		optionBContent.setText(question.getSb());
 		optionCContent.setText(question.getSc());
 		optionDContent.setText(question.getSd());
+		delProbelmDesc.setText(question.getSubjectTable() + " Lv." + question.getLv());
 	}
 }

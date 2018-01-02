@@ -7,6 +7,7 @@ import org.imslab.scene.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 
 public class EditController extends Controller
 {
@@ -17,6 +18,8 @@ public class EditController extends Controller
 	@FXML TextField optionBContent;
 	@FXML TextField optionCContent;
 	@FXML TextField optionDContent;
+
+	@FXML Label editProblemDesc;
 	
 	
 	public EditController() {
@@ -61,6 +64,7 @@ public class EditController extends Controller
 		optionBContent.setText("");
 		optionCContent.setText("");
 		optionDContent.setText("");
+		editProblemDesc.setText("");
 	}
 	
 	/**
@@ -74,5 +78,6 @@ public class EditController extends Controller
 		optionBContent.setText(question.getSb());
 		optionCContent.setText(question.getSc());
 		optionDContent.setText(question.getSd());
+		editProblemDesc.setText(question.getSubjectTable() + " Lv." + question.getLv());
 	}
 }

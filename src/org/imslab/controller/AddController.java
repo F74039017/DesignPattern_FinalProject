@@ -7,6 +7,7 @@ import org.imslab.scene.SceneManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 
 public class AddController extends Controller
 {
@@ -18,6 +19,8 @@ public class AddController extends Controller
 	@FXML TextField optionCContent;
 	@FXML TextField optionDContent;
 
+	@FXML Label addProbleDesc;
+
 	public AddController() {
 		super();
 		model = Model.getInstance();
@@ -26,6 +29,12 @@ public class AddController extends Controller
 
 	@FXML 
 	public void processAdd() {
+		if (problemContent.getText().isEmpty() || optionAContent.getText().isEmpty() || 
+				optionBContent.getText().isEmpty() || optionCContent.getText().isEmpty() || optionDContent.getText().isEmpty()) {
+			model.alert("Oops", "Field can't be empty.");
+			return;
+		}
+		
 		//prepare
 		Question question = new Question.Builder().id(model.getCurrentData().getNextAutoIncrementId())
 												 .lv(model.getCurrentData().getCurrentLv())
@@ -46,7 +55,12 @@ public class AddController extends Controller
 	
 	@FXML 
 	public void processCancel() {
+		clear();
 		SceneManager.getInstance().switchScene("ModifyDB");
+	}
+	
+	public void prepareUI() {
+		addProbleDesc.setText(model.getCurrentData().getSubjectTableName() + " Lv." + model.getCurrentData().getNextAutoIncrementId());
 	}
 	
 	private void clear() {
@@ -55,6 +69,7 @@ public class AddController extends Controller
 		optionBContent.setText("");
 		optionCContent.setText("");
 		optionDContent.setText("");
+		addProbleDesc.setText("");
 	}
 	
 }

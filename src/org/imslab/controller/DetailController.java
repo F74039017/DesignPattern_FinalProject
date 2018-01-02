@@ -17,6 +17,7 @@ public class DetailController extends Controller
 	@FXML Label optionBContent;
 	@FXML Label optionCContent;
 	@FXML Label optionDContent;
+	@FXML Label detailProbelmDesc;
 	
 	public DetailController() {
 		super();
@@ -37,6 +38,7 @@ public class DetailController extends Controller
 		optionBContent.setText("");
 		optionCContent.setText("");
 		optionDContent.setText("");
+		detailProbelmDesc.setText("");
 	}
 	
 	/**
@@ -58,5 +60,6 @@ public class DetailController extends Controller
 		optionBContent.setText(question.getSb());
 		optionCContent.setText(question.getSc());
 		optionDContent.setText(question.getSd());
+		detailProbelmDesc.setText(question.getSubjectTable() + " Lv." + question.getLv());
 	}
 }

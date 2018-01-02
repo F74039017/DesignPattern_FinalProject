@@ -135,6 +135,8 @@ public class ModifyDBController extends Controller {
 	
 	@FXML 
 	public void processAdd() {
+		AddController controller = (AddController)SceneManager.getInstance().getController("AddProblem");
+		controller.prepareUI();
 		SceneManager.getInstance().switchScene("AddProblem");
 	}
 
@@ -145,8 +147,6 @@ public class ModifyDBController extends Controller {
 			return;
 		}
 		
-		// XXX: This is a little dirty work...
-		// Controller should not be accessed directly.
 		EditController controller = (EditController)SceneManager.getInstance().getController("EditProblem");
 		controller.prepareUI();
 		SceneManager.getInstance().switchScene("EditProblem");
@@ -159,8 +159,6 @@ public class ModifyDBController extends Controller {
 			return;
 		}
 		
-		// XXX: This is a little dirty work...
-		// Controller should not be accessed directly.
 		DelController controller = (DelController)SceneManager.getInstance().getController("DeleteProblem");
 		controller.prepareUI();
 		SceneManager.getInstance().switchScene("DeleteProblem");
