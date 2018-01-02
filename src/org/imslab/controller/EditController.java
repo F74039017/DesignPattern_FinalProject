@@ -35,6 +35,12 @@ public class EditController extends Controller
 	@FXML 
 	public void processEdit() {
 		
+		if (problemContent.getText().isEmpty() || optionAContent.getText().isEmpty() || optionBContent.getText().isEmpty() ||
+				optionCContent.getText().isEmpty() || optionDContent.getText().isEmpty()) {
+			model.alert("Oops", "Fields can't be empty.");
+			return;
+		}
+		
 		try {
 			Question question = model.getCurrentData().getSelectQuestion();
 			question.setContent(problemContent.getText());

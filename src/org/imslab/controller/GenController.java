@@ -40,6 +40,7 @@ public class GenController extends Controller {
 	@FXML TableColumn noCol;
 	@FXML TableColumn contentCol;
 	@FXML TableView sheetTable;
+	@FXML TableColumn subjectCol;
 	
 	public GenController() {
 		super();
@@ -53,26 +54,34 @@ public class GenController extends Controller {
 		super(name);
 	}
 	
+	private void clear() {
+		questionList.clear();
+	}
+	
 	@FXML
 	private void initialize() {
 		// bind table and question list
 		noCol.setCellValueFactory(new PropertyValueFactory<>("id"));
 		contentCol.setCellValueFactory(new PropertyValueFactory<>("content"));
+		subjectCol.setCellValueFactory(new PropertyValueFactory<>("subjectTable"));
 		sheetTable.setItems(questionList);	
 	}
 
 	@FXML 
 	public void processModifyDB() {
+		clear();
 		model.setCurrentData(model.getChineseData());
 		SceneManager.getInstance().switchScene("ModifyDB");
 	}
 	@FXML 
 	public void processRegister() {
+		clear();
 		SceneManager.getInstance().switchScene("Register");
 	}
 	
 	@FXML 
 	public void processLogout() {
+		clear();
 		SceneManager.getInstance().switchScene("Login");
 	}
 	

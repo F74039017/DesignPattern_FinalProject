@@ -11,9 +11,6 @@ public class CreateAccountTableCmd extends ModifyCommand {
 	public static String nameField = DB.ACCOUNT_USERNAME;
 	public static String passwordField = DB.ACCOUNT_PASSWORD;
 
-	/**
-	 * Table name and field is static. All args will be ignored.
-	 */
 	public CreateAccountTableCmd() {
 		super("CreateAccountTable");
 		addDependentCmd(new CreateTableCmd(tableName, nameField, passwordField));

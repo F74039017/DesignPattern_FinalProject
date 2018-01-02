@@ -14,7 +14,7 @@ public class Question {
 	protected SimpleStringProperty content;
 	protected SimpleStringProperty lv;
 	protected SimpleStringProperty sa, sb, sc, sd;
-	protected String subjectTable = null;
+	protected SimpleStringProperty subjectTable;
 	
 	public Question() {
 		id = new SimpleStringProperty("-1");
@@ -24,6 +24,7 @@ public class Question {
 		sb = new SimpleStringProperty("");
 		sc = new SimpleStringProperty("");
 		sd = new SimpleStringProperty("");
+		subjectTable = new SimpleStringProperty("");
 	}
 	
 	// Clone constructor
@@ -45,14 +46,14 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return String.format("<%s %s>", subjectTable, id.getValue());
+		return String.format("<%s %s>", subjectTable.getValue(), id.getValue());
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Question) {
 			Question cp = (Question) obj;
-			if (this.id.getValue().equals(cp.id.getValue()) && this.subjectTable.equals(cp.subjectTable)) {
+			if (this.id.getValue().equals(cp.id.getValue()) && this.subjectTable.getValue().equals(cp.subjectTable.getValue())) {
 				return true;
 			}
 		}
@@ -69,7 +70,7 @@ public class Question {
 						   + "\t(b) %s\n"
 						   + "\t(c) %s\n"
 						   + "\t(d) %s\n",
-						   subjectTable, content.get(), sa.get(), sb.get(), sc.get(), sd.get());
+						   subjectTable.get(), content.get(), sa.get(), sb.get(), sc.get(), sd.get());
 	}
 	
 	/* Accessors */
@@ -131,11 +132,11 @@ public class Question {
 	}
 
 	public String getSubjectTable() {
-		return subjectTable;
+		return subjectTable.get();
 	}
 
 	public void setSubjectTable(String subjectTable) {
-		this.subjectTable = subjectTable;
+		this.subjectTable.set(subjectTable);
 	}
 
 	

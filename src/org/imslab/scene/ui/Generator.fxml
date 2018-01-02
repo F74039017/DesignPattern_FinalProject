@@ -72,8 +72,9 @@
          </font></Button>
       <TableView fx:id="sheetTable" layoutX="50.0" layoutY="278.0" prefHeight="355.0" prefWidth="600.0">
         <columns>
-          <TableColumn fx:id="noCol" prefWidth="75.0" text="No." />
-            <TableColumn fx:id="contentCol" prefWidth="524.0" text="Content" />
+          <TableColumn fx:id="subjectCol" prefWidth="75.0" text="Subject" />
+            <TableColumn fx:id="noCol" prefWidth="45.0" text="No." />
+            <TableColumn fx:id="contentCol" prefWidth="485.0" text="Content" />
         </columns>
       </TableView>
       <Button fx:id="previewButton" layoutX="600.0" layoutY="655.0" mnemonicParsing="false" onAction="#processPreview" prefWidth="80.0" text="Save">
