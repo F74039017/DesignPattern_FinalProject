@@ -14,12 +14,16 @@ public class EditController extends Controller
 	private Model model;
 
 	@FXML TextArea problemContent;
-	@FXML TextField optionAContent;
-	@FXML TextField optionBContent;
-	@FXML TextField optionCContent;
-	@FXML TextField optionDContent;
 
 	@FXML Label editProblemDesc;
+
+	@FXML TextArea optionAContent;
+
+	@FXML TextArea optionBContent;
+
+	@FXML TextArea optionCContent;
+
+	@FXML TextArea optionDContent;
 	
 	
 	public EditController() {

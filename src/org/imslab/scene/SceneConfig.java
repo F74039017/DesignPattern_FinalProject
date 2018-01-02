@@ -7,7 +7,6 @@ public class SceneConfig {
 	public static final String[] FXML_LIST = {
 			"Login.fxml",
 			"Generator.fxml",
-			"SheetPreview.fxml",
 			"Register.fxml",
 			"ModifyDB.fxml",
 			"AddProblem.fxml",

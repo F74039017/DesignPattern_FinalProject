@@ -8,55 +8,97 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.imslab.controller.GenController">
    <children>
-      <Label layoutX="25.0" layoutY="25.0" text="Test Sheet Generator">
+      <Label layoutX="25.0" layoutY="25.0" prefHeight="30.0" text="Test Sheet Generator">
          <font>
-            <Font name="Verdana" size="24.0" />
+            <Font name="Helvetica" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="regButton" layoutX="500.0" layoutY="25.0" mnemonicParsing="false" onAction="#processRegister" prefWidth="82.0" text="Register">
+      <Button fx:id="regButton" layoutX="500.0" layoutY="27.0" mnemonicParsing="false" onAction="#processRegister" prefWidth="80.0" text="Register">
          <font>
-            <Font size="14.0" />
+            <Font name="Helvetica" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="LogoutButton" layoutX="600.0" layoutY="25.0" mnemonicParsing="false" onAction="#processLogout" prefWidth="82.0" text="Logout">
+      <Button fx:id="LogoutButton" layoutX="600.0" layoutY="27.0" mnemonicParsing="false" onAction="#processLogout" prefWidth="80.0" text="Logout">
          <font>
-            <Font name="Verdana" size="14.0" />
+            <Font name="Helvetica" size="14.0" />
          </font>
       </Button>
       <Button fx:id="chineseButton" layoutX="50.0" layoutY="90.0" mnemonicParsing="false" onAction="#processChineseButton" prefWidth="80.0" text="Chinese">
          <font>
-            <Font size="14.0" />
+            <Font name="Helvetica" size="14.0" />
          </font>
       </Button>
       <Button fx:id="englishButton" layoutX="140.0" layoutY="90.0" mnemonicParsing="false" onAction="#processEnglishButton" prefWidth="80.0" text="English">
          <font>
-            <Font size="14.0" />
+            <Font name="Helvetica" size="14.0" />
          </font>
       </Button>
       <Button fx:id="mathButton" layoutX="230.0" layoutY="90.0" mnemonicParsing="false" onAction="#processMathButton" prefWidth="80.0" text="Math">
          <font>
-            <Font size="14.0" />
+            <Font name="Helvetica" size="14.0" />
          </font>
       </Button>
-      <CheckBox fx:id="lv1Ckbox" layoutX="50.0" layoutY="160.0" mnemonicParsing="false" text="Level 1" />
-      <CheckBox fx:id="lv2Ckbox" layoutX="130.0" layoutY="160.0" mnemonicParsing="false" text="Level 2" />
-      <CheckBox fx:id="lv3Ckbox" layoutX="210.0" layoutY="160.0" mnemonicParsing="false" text="Level 3" />
-      <CheckBox fx:id="lv4Ckbox" layoutX="290.0" layoutY="160.0" mnemonicParsing="false" text="Level 4" />
-      <CheckBox fx:id="lv5Ckbox" layoutX="370.0" layoutY="160.0" mnemonicParsing="false" text="Level 5" />
-      <Button fx:id="selectAllButton" layoutX="460.0" layoutY="156.0" mnemonicParsing="false" onAction="#processSelectAllButton" prefWidth="80.0" text="Select All" />
-      <Button fx:id="cancelButton" layoutX="560.0" layoutY="156.0" mnemonicParsing="false" onAction="#processCancelButton" prefWidth="80.0" text="Cancel" />
-      <Button fx:id="delProbemButton" layoutX="560.0" layoutY="222.0" mnemonicParsing="false" onAction="#processDelButton" prefWidth="80.0" text="Delete" />
+      <CheckBox fx:id="lv1Ckbox" layoutX="50.0" layoutY="160.0" mnemonicParsing="false" text="Level 1">
+         <font>
+            <Font name="Helvetica" size="14.0" />
+         </font></CheckBox>
+      <CheckBox fx:id="lv2Ckbox" layoutX="130.0" layoutY="160.0" mnemonicParsing="false" text="Level 2">
+         <font>
+            <Font name="Helvetica" size="14.0" />
+         </font></CheckBox>
+      <CheckBox fx:id="lv3Ckbox" layoutX="210.0" layoutY="160.0" mnemonicParsing="false" text="Level 3">
+         <font>
+            <Font name="Helvetica" size="14.0" />
+         </font></CheckBox>
+      <CheckBox fx:id="lv4Ckbox" layoutX="290.0" layoutY="160.0" mnemonicParsing="false" text="Level 4">
+         <font>
+            <Font name="Helvetica" size="14.0" />
+         </font></CheckBox>
+      <CheckBox fx:id="lv5Ckbox" layoutX="370.0" layoutY="160.0" mnemonicParsing="false" text="Level 5">
+         <font>
+            <Font name="Helvetica" size="14.0" />
+         </font></CheckBox>
+      <Button fx:id="selectAllButton" layoutX="460.0" layoutY="156.0" mnemonicParsing="false" onAction="#processSelectAllButton" prefWidth="80.0" text="Select All">
+         <font>
+            <Font name="Helvetica" size="14.0" />
+         </font></Button>
+      <Button fx:id="cancelButton" layoutX="560.0" layoutY="156.0" mnemonicParsing="false" onAction="#processCancelButton" prefWidth="80.0" text="Cancel">
+         <font>
+            <Font name="Helvetica" size="14.0" />
+         </font></Button>
+      <Button fx:id="delProbemButton" layoutX="560.0" layoutY="222.0" mnemonicParsing="false" onAction="#processDelButton" prefWidth="80.0" text="Delete">
+         <font>
+            <Font name="Helvetica" size="14.0" />
+         </font></Button>
       <TableView fx:id="sheetTable" layoutX="50.0" layoutY="278.0" prefHeight="355.0" prefWidth="600.0">
         <columns>
           <TableColumn fx:id="noCol" prefWidth="75.0" text="No." />
             <TableColumn fx:id="contentCol" prefWidth="524.0" text="Content" />
         </columns>
       </TableView>
-      <Button fx:id="previewButton" layoutX="600.0" layoutY="655.0" mnemonicParsing="false" onAction="#processPreview" prefWidth="82.0" text="Save" />
-      <Button fx:id="addProblemButton" layoutX="460.0" layoutY="222.0" mnemonicParsing="false" onAction="#processAddButton" prefWidth="80.0" text="Add" />
-      <Button fx:id="modDBButton" layoutX="400.0" layoutY="25.0" mnemonicParsing="false" onAction="#processModifyDB" prefWidth="82.0" text="Modify DB" />
-      <Button fx:id="moveDownButton" layoutX="261.0" layoutY="222.0" mnemonicParsing="false" onAction="#processMoveDownButton" prefHeight="27.0" prefWidth="99.0" text="Move Down" />
-      <Button fx:id="detailButton" layoutX="50.0" layoutY="222.0" mnemonicParsing="false" onAction="#processDetailButton" prefWidth="80.0" text="Detail" />
-      <Button fx:id="moveUpButton" layoutX="150.0" layoutY="222.0" mnemonicParsing="false" onAction="#processMoveUpButton" prefHeight="27.0" prefWidth="99.0" text="Move Up" />
+      <Button fx:id="previewButton" layoutX="600.0" layoutY="655.0" mnemonicParsing="false" onAction="#processPreview" prefWidth="80.0" text="Save">
+         <font>
+            <Font name="Helvetica" size="14.0" />
+         </font></Button>
+      <Button fx:id="addProblemButton" layoutX="460.0" layoutY="222.0" mnemonicParsing="false" onAction="#processAddButton" prefWidth="80.0" text="Add">
+         <font>
+            <Font name="Helvetica" size="14.0" />
+         </font></Button>
+      <Button fx:id="modDBButton" layoutX="400.0" layoutY="27.0" mnemonicParsing="false" onAction="#processModifyDB" prefWidth="80.0" text="Modify DB">
+         <font>
+            <Font name="Helvetica" size="13.0" />
+         </font></Button>
+      <Button fx:id="moveDownButton" layoutX="245.0" layoutY="222.0" mnemonicParsing="false" onAction="#processMoveDownButton" prefWidth="95.0" text="Move Down">
+         <font>
+            <Font name="Helvetica" size="14.0" />
+         </font></Button>
+      <Button fx:id="detailButton" layoutX="50.0" layoutY="222.0" mnemonicParsing="false" onAction="#processDetailButton" prefWidth="80.0" text="Detail">
+         <font>
+            <Font name="Helvetica" size="14.0" />
+         </font></Button>
+      <Button fx:id="moveUpButton" layoutX="140.0" layoutY="222.0" mnemonicParsing="false" onAction="#processMoveUpButton" prefWidth="95.0" text="Move Up">
+         <font>
+            <Font name="Helvetica" size="14.0" />
+         </font></Button>
    </children>
 </AnchorPane>

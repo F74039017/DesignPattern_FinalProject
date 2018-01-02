@@ -69,13 +69,16 @@ public class SceneManager {
 	 * @throws IOException
 	 */
 	private Scene createScene(String url) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
-		Parent root = loader.load();
-		
 		String sceneName = url2SceneName(url);
-		controllerMap.put(sceneName, loader.getController());
-		
-		return new Scene(root);
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(url));
+			Parent root = loader.load();
+			controllerMap.put(sceneName, loader.getController());
+			return new Scene(root);
+		} catch (Exception e) {
+			System.err.println("Fail to create scene: " + sceneName);
+			return null;
+		}
 	}
 	
 	/**
